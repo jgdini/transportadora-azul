@@ -217,17 +217,16 @@ p{margin:0}
 .b-g{grid-column:4;grid-row:3}
 .b-c .chip{position:absolute;top:18px;left:18px;background:rgba(10,28,58,.55);color:#fff}
 
-/* frota em carrossel de fotos */
-.carrossel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
-.foto-card{scroll-snap-align:start;margin:0;background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+/* frota: faixa de fotos que passa sozinha (mesmo padrão dos certificados do Marcelo) */
+.frota-faixa{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.frota-trilho{display:flex;width:max-content;gap:16px;padding:4px 0;animation:frota-passa 45s linear infinite}
+.frota-faixa:hover .frota-trilho,.frota-faixa:focus-within .frota-trilho{animation-play-state:paused}
+@keyframes frota-passa{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
+.foto-card{flex:none;width:300px;margin:0;background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .foto-card img{aspect-ratio:4/3.3;width:100%;height:auto;object-fit:cover}
 .foto-card figcaption{padding:18px 22px 22px}
 .foto-card b{display:block;font-family:var(--display);font-weight:800;font-size:1.15rem}
 .foto-card span{color:var(--cinza);font-size:.97rem}
-.car-nav{display:flex;gap:10px}
-.car-nav button{width:52px;height:52px;border-radius:50%;border:0;background:#fff;color:var(--tinta);cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 8px rgba(15,26,44,.08)}
-.car-nav button:hover{background:var(--marinho);color:#fff}
-.car-nav svg{width:22px;height:22px}
 .frota-chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:24px 0 0}
 .frota-chips li{background:#fff;border-radius:999px;padding:10px 18px 8px;font-weight:700;font-size:.97rem}
 .frota-chips li b{font-family:var(--display);font-weight:900;color:var(--azul);margin-right:4px}
@@ -359,6 +358,8 @@ p{margin:0}
   .bento{gap:12px}
   .b-num{padding:22px}
   .b-c{min-height:380px}
+  .foto-card{width:240px}
+  .frota-trilho{animation-duration:36s}
   .cob-txt{padding:28px 22px}
   .placa-in{padding:16px 18px}
   .chamada{padding:40px 24px;min-height:420px;justify-content:flex-end}
@@ -543,17 +544,20 @@ p{margin:0}
   <div class="wrap">
     <div class="sec-head">
       <div><span class="chip">Frota</span><h2 id="h-frota">Conheça os caminhões</h2></div>
-      <div class="car-nav">
-        <button type="button" data-car="-1" aria-label="Fotos anteriores"><svg aria-hidden="true"><use href="#i-seta-e"/></svg></button>
-        <button type="button" data-car="1" aria-label="Próximas fotos"><svg aria-hidden="true"><use href="#i-seta-d"/></svg></button>
-      </div>
     </div>
-    <div class="carrossel" id="carrossel" tabindex="0" role="region" aria-label="Fotos da frota">
-      <figure class="foto-card"><img src="assets/img/atego-360.webp" srcset="assets/img/atego-360.webp 360w, assets/img/atego-480.webp 480w, assets/img/atego-800.webp 800w" sizes="(min-width: 1000px) 300px, 280px" width="800" height="1067" loading="lazy" decoding="async" alt="Caminhão truck baú branco Mercedes-Benz Atego estacionado na grama"><figcaption><b>Truck baú</b><span>Até 14 t, para o interior e estados vizinhos</span></figcaption></figure>
-      <figure class="foto-card"><img src="assets/img/graneleiro-360.webp" srcset="assets/img/graneleiro-360.webp 360w, assets/img/graneleiro-480.webp 480w, assets/img/graneleiro-800.webp 800w" sizes="(min-width: 1000px) 300px, 280px" width="800" height="1067" loading="lazy" decoding="async" alt="Caminhão graneleiro vermelho Volvo com lona preta numa estrada de terra"><figcaption><b>Graneleiro com lona</b><span>Para carga a granel e sacaria</span></figcaption></figure>
-      <figure class="foto-card"><img src="assets/img/bau-lateral-360.webp" srcset="assets/img/bau-lateral-360.webp 360w, assets/img/bau-lateral-640.webp 640w, assets/img/bau-lateral-960.webp 960w" sizes="(min-width: 1000px) 300px, 280px" width="960" height="720" loading="lazy" decoding="async" alt="Caminhão baú branco de três eixos visto de lado"><figcaption><b>Baú de três eixos</b><span>Mais volume para lotação</span></figcaption></figure>
-      <figure class="foto-card"><img src="assets/img/frota-dupla-360.webp" srcset="assets/img/frota-dupla-360.webp 360w, assets/img/frota-dupla-640.webp 640w, assets/img/frota-dupla-960.webp 960w" sizes="(min-width: 1000px) 300px, 280px" width="960" height="720" loading="lazy" decoding="async" alt="Dois caminhões baú brancos no pátio de piso intertravado"><figcaption><b>Toco e truck</b><span>Entregas na Grande SP</span></figcaption></figure>
-      <figure class="foto-card"><img src="assets/img/frota-garagem-360.webp" srcset="assets/img/frota-garagem-360.webp 360w, assets/img/frota-garagem-480.webp 480w, assets/img/frota-garagem-800.webp 800w" sizes="(min-width: 1000px) 300px, 280px" width="800" height="1067" loading="lazy" decoding="async" alt="Quatro caminhões estacionados na garagem coberta em frente ao prédio da empresa"><figcaption><b>Garagem coberta</b><span>Os caminhões dormem na base, em Cotia</span></figcaption></figure>
+    <div class="frota-faixa">
+      <div class="frota-trilho">
+      <figure class="foto-card"><img src="assets/img/atego-360.webp" srcset="assets/img/atego-360.webp 360w, assets/img/atego-480.webp 480w, assets/img/atego-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt="Caminhão truck baú branco Mercedes-Benz Atego estacionado na grama"><figcaption><b>Truck baú</b><span>Até 14 t, para o interior e estados vizinhos</span></figcaption></figure>
+      <figure class="foto-card"><img src="assets/img/graneleiro-360.webp" srcset="assets/img/graneleiro-360.webp 360w, assets/img/graneleiro-480.webp 480w, assets/img/graneleiro-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt="Caminhão graneleiro vermelho Volvo com lona preta numa estrada de terra"><figcaption><b>Graneleiro com lona</b><span>Para carga a granel e sacaria</span></figcaption></figure>
+      <figure class="foto-card"><img src="assets/img/bau-lateral-360.webp" srcset="assets/img/bau-lateral-360.webp 360w, assets/img/bau-lateral-640.webp 640w, assets/img/bau-lateral-960.webp 960w" sizes="(min-width: 641px) 300px, 240px" width="960" height="720" loading="lazy" decoding="async" alt="Caminhão baú branco de três eixos visto de lado"><figcaption><b>Baú de três eixos</b><span>Mais volume para lotação</span></figcaption></figure>
+      <figure class="foto-card"><img src="assets/img/frota-dupla-360.webp" srcset="assets/img/frota-dupla-360.webp 360w, assets/img/frota-dupla-640.webp 640w, assets/img/frota-dupla-960.webp 960w" sizes="(min-width: 641px) 300px, 240px" width="960" height="720" loading="lazy" decoding="async" alt="Dois caminhões baú brancos no pátio de piso intertravado"><figcaption><b>Toco e truck</b><span>Entregas na Grande SP</span></figcaption></figure>
+      <figure class="foto-card"><img src="assets/img/frota-garagem-360.webp" srcset="assets/img/frota-garagem-360.webp 360w, assets/img/frota-garagem-480.webp 480w, assets/img/frota-garagem-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt="Quatro caminhões estacionados na garagem coberta em frente ao prédio da empresa"><figcaption><b>Garagem coberta</b><span>Os caminhões dormem na base, em Cotia</span></figcaption></figure>
+      <figure class="foto-card" aria-hidden="true"><img src="assets/img/atego-360.webp" srcset="assets/img/atego-360.webp 360w, assets/img/atego-480.webp 480w, assets/img/atego-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt=""><figcaption><b>Truck baú</b><span>Até 14 t, para o interior e estados vizinhos</span></figcaption></figure>
+      <figure class="foto-card" aria-hidden="true"><img src="assets/img/graneleiro-360.webp" srcset="assets/img/graneleiro-360.webp 360w, assets/img/graneleiro-480.webp 480w, assets/img/graneleiro-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt=""><figcaption><b>Graneleiro com lona</b><span>Para carga a granel e sacaria</span></figcaption></figure>
+      <figure class="foto-card" aria-hidden="true"><img src="assets/img/bau-lateral-360.webp" srcset="assets/img/bau-lateral-360.webp 360w, assets/img/bau-lateral-640.webp 640w, assets/img/bau-lateral-960.webp 960w" sizes="(min-width: 641px) 300px, 240px" width="960" height="720" loading="lazy" decoding="async" alt=""><figcaption><b>Baú de três eixos</b><span>Mais volume para lotação</span></figcaption></figure>
+      <figure class="foto-card" aria-hidden="true"><img src="assets/img/frota-dupla-360.webp" srcset="assets/img/frota-dupla-360.webp 360w, assets/img/frota-dupla-640.webp 640w, assets/img/frota-dupla-960.webp 960w" sizes="(min-width: 641px) 300px, 240px" width="960" height="720" loading="lazy" decoding="async" alt=""><figcaption><b>Toco e truck</b><span>Entregas na Grande SP</span></figcaption></figure>
+      <figure class="foto-card" aria-hidden="true"><img src="assets/img/frota-garagem-360.webp" srcset="assets/img/frota-garagem-360.webp 360w, assets/img/frota-garagem-480.webp 480w, assets/img/frota-garagem-800.webp 800w" sizes="(min-width: 641px) 300px, 240px" width="800" height="1067" loading="lazy" decoding="async" alt=""><figcaption><b>Garagem coberta</b><span>Os caminhões dormem na base, em Cotia</span></figcaption></figure>
+      </div>
     </div>
     <ul class="frota-chips" aria-label="Composição da frota">
       <li><b>2</b>VUCs baú</li><li><b>3</b>tocos baú</li><li><b>4</b>trucks baú</li><li><b>2</b>graneleiros</li><li>Rastreamento 24 h</li>
@@ -753,12 +757,6 @@ p{margin:0}
     vIO.observe(video);
   }
 
-  // carrossel da frota
-  const car = document.getElementById('carrossel');
-  document.querySelectorAll('[data-car]').forEach(b => b.addEventListener('click', () => {
-    const passo = car.querySelector('.foto-card').offsetWidth + 16;
-    car.scrollBy({ left: passo * Number(b.dataset.car), behavior: reduceMotion ? 'auto' : 'smooth' });
-  }));
 
   // âncoras com rolagem suave
   document.addEventListener('click', e => {
