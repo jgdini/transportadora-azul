@@ -48,7 +48,7 @@
 {"@type":"Question","name":"Vocês entregam no centro expandido de São Paulo?","acceptedAnswer":{"@type":"Answer","text":"Sim. Os dois VUCs da frota podem circular na Zona de Máxima Restrição de Circulação (ZMRC), onde caminhões maiores têm horário restrito. Eles entregam em lojas, condomínios e centros de distribuição dentro do centro expandido."}},
 {"@type":"Question","name":"Em quanto tempo sai a cotação?","acceptedAnswer":{"@type":"Answer","text":"Em até 30 minutos pelo WhatsApp (11) 99585-4072, de segunda a sexta das 7h às 18h e aos sábados das 7h às 12h. Para cotar, informe origem, destino, peso, número de volumes e valor da nota fiscal."}},
 {"@type":"Question","name":"A carga viaja com seguro?","acceptedAnswer":{"@type":"Answer","text":"Sim. Toda viagem sai com seguro RCTR-C, obrigatório para transportadoras, e RC-DC, que cobre roubo e desvio de carga. A cobertura vai até o valor da nota fiscal."}},
-{"@type":"Question","name":"Como acompanho a entrega?","acceptedAnswer":{"@type":"Answer","text":"Na saída do caminhão você recebe pelo WhatsApp um link de rastreio com a posição do veículo. Na entrega, o motorista fotografa o canhoto assinado e a foto chega no mesmo WhatsApp."}},
+{"@type":"Question","name":"Como acompanho a entrega?","acceptedAnswer":{"@type":"Answer","text":"Pela chave do CT-e, que enviamos no seu WhatsApp e que também vem no DACTE que acompanha a carga. Na aba Rastrear carga do site, a chave é copiada e a consulta pública da Sefaz abre. Lá aparece o evento MDF-e autorizado quando a carga sai para entrega. Na entrega, o motorista fotografa o canhoto assinado e a foto chega no seu WhatsApp."}},
 {"@type":"Question","name":"Vocês coletam no mesmo dia?","acceptedAnswer":{"@type":"Answer","text":"Sim, na Grande São Paulo, para pedidos confirmados até as 11h. Pedidos confirmados depois disso são coletados no dia útil seguinte."}},
 {"@type":"Question","name":"Que cargas a Transportadora Azul não transporta?","acceptedAnswer":{"@type":"Answer","text":"Produtos perigosos, carga refrigerada, carga viva e mudanças residenciais."}},
 {"@type":"Question","name":"Onde fica a Transportadora Azul?","acceptedAnswer":{"@type":"Answer","text":"Na Rua Saturno, 8, Jardim Nova Coimbra, Cotia (SP), CEP 06702-170, perto da Rodovia Raposo Tavares e a cerca de 9 km do Rodoanel Mário Covas."}}]}
@@ -174,6 +174,14 @@ p{margin:0}
 .painel .btn{width:100%;margin-top:auto}
 .painel-nota{font-size:.88rem;color:var(--cinza);text-align:center}
 .painel-nota b{color:var(--tinta)}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-azul:hover{background:#174fb0}
+.campo[hidden]{display:none}
+.legenda{list-style:none;margin:0;padding:12px 16px;background:var(--fundo);border-radius:14px;display:grid;gap:4px;font-size:.88rem;color:var(--cinza)}
+.legenda[hidden]{display:none}
+.legenda b{color:var(--tinta);margin-right:4px}
+.legenda b::after{content:" ·"}
+.link-zap{font:inherit;font-weight:700;color:var(--zap-esc);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
 
 /* serviços em blocos sobre o marinho */
 .servicos-sec{background:var(--marinho);padding:28px 0 84px;color:#fff}
@@ -455,15 +463,20 @@ p{margin:0}
         <p class="painel-nota" id="nota-cotar" aria-live="polite">Resposta em até <b>30 minutos</b>, de segunda a sábado.</p>
       </form></div>
       <div class="painel" id="p-rastrear" role="tabpanel" aria-labelledby="aba-rastrear" hidden><form id="f-rastrear" novalidate>
-        <h2>Onde está a sua carga?</h2>
+        <h2>A sua carga já saiu?</h2>
         <div class="campos">
-          <div class="campo"><svg aria-hidden="true"><use href="#i-caixa"/></svg><label for="f-doc">Documento</label>
-            <select id="f-doc" name="doc"><option value="Nota fiscal">Nota fiscal</option><option value="CT-e">CT-e</option></select></div>
-          <div class="campo"><svg aria-hidden="true"><use href="#i-busca"/></svg><label for="f-nf">Número</label><input id="f-nf" name="nf" inputmode="numeric" autocomplete="off" placeholder="Número ou chave da NF"></div>
-          <div class="campo"><svg aria-hidden="true"><use href="#i-origem"/></svg><label for="f-rem">Remetente</label><input id="f-rem" name="remetente" placeholder="Empresa que enviou"></div>
+          <div class="campo"><svg aria-hidden="true"><use href="#i-caixa"/></svg><label for="f-doc">Consultar</label>
+            <select id="f-doc" name="doc"><option value="CT-e">Chave do CT-e</option><option value="Nota fiscal">Nota fiscal</option></select></div>
+          <div class="campo"><svg aria-hidden="true"><use href="#i-busca"/></svg><label for="f-nf">Número</label><input id="f-nf" name="nf" inputmode="numeric" autocomplete="off" placeholder="44 dígitos da chave"></div>
+          <div class="campo" id="campo-rem" hidden><svg aria-hidden="true"><use href="#i-origem"/></svg><label for="f-rem">Remetente</label><input id="f-rem" name="remetente" placeholder="Empresa que enviou"></div>
         </div>
-        <button class="btn btn-zap" type="submit"><svg aria-hidden="true"><use href="#i-zap"/></svg>Consultar no WhatsApp</button>
-        <p class="painel-nota" id="nota-rastrear" aria-live="polite">Vale o número da nota fiscal, do CT-e ou a chave de 44 dígitos. Respondemos com a posição do caminhão e a previsão de entrega.</p>
+        <ul class="legenda" id="legenda-cte" aria-label="O que aparece na Sefaz">
+          <li><b>Autorizado o uso</b> o CT-e foi emitido</li>
+          <li><b>MDF-e autorizado</b> a carga saiu para entrega</li>
+          <li><b>Comprovante de entrega</b> a carga foi entregue</li>
+        </ul>
+        <button class="btn btn-azul" type="submit" id="r-enviar"><svg aria-hidden="true"><use href="#i-busca"/></svg><span>Consultar na Sefaz</span></button>
+        <p class="painel-nota" id="nota-rastrear" aria-live="polite">A chave é copiada e o site da Sefaz abre. Cole no campo e confirme o captcha. <button type="button" class="link-zap" id="r-zap">Prefiro perguntar no WhatsApp</button></p>
       </form></div>
     </div>
   </div>
@@ -599,7 +612,7 @@ p{margin:0}
     <ol class="passos">
       <li><h3>Você pede a cotação</h3><p>Pelo WhatsApp ou pelo bloco de cotação no topo da página. O valor sai em até 30 minutos.</p></li>
       <li><h3>A gente agenda a coleta</h3><p>Confirmou até as 11h, coletamos no mesmo dia. Depois disso, no dia útil seguinte.</p></li>
-      <li><h3>Você acompanha pelo link</h3><p>Quando o caminhão sai, mandamos no seu WhatsApp um link com a posição dele no mapa.</p></li>
+      <li><h3>Você acompanha pelo CT-e</h3><p>Mandamos a chave do CT-e no seu WhatsApp. Com ela, você vê no site da Sefaz quando a carga sai para entrega.</p></li>
       <li><h3>O comprovante chega na hora</h3><p>Na entrega o motorista fotografa o canhoto assinado e a foto chega no mesmo WhatsApp.</p></li>
     </ol>
   </div>
@@ -638,7 +651,7 @@ p{margin:0}
       <details><summary>Vocês entregam no centro expandido de São Paulo?</summary><p>Sim. Os dois VUCs da frota podem circular na Zona de Máxima Restrição de Circulação (ZMRC), onde caminhões maiores têm horário restrito. Eles entregam em lojas, condomínios e centros de distribuição dentro do centro expandido.</p></details>
       <details><summary>Em quanto tempo sai a cotação?</summary><p>Em até 30 minutos pelo WhatsApp (11) 99585-4072, de segunda a sexta das 7h às 18h e aos sábados das 7h às 12h. Para cotar, informe origem, destino, peso, número de volumes e valor da nota fiscal.</p></details>
       <details><summary>A carga viaja com seguro?</summary><p>Sim. Toda viagem sai com seguro RCTR-C, obrigatório para transportadoras, e RC-DC, que cobre roubo e desvio de carga. A cobertura vai até o valor da nota fiscal.</p></details>
-      <details><summary>Como acompanho a entrega?</summary><p>Na saída do caminhão você recebe pelo WhatsApp um link de rastreio com a posição do veículo. Na entrega, o motorista fotografa o canhoto assinado e a foto chega no mesmo WhatsApp.</p></details>
+      <details><summary>Como acompanho a entrega?</summary><p>Pela chave do CT-e, que enviamos no seu WhatsApp e que também vem no DACTE que acompanha a carga. Na aba Rastrear carga do site, a chave é copiada e a consulta pública da Sefaz abre. Lá aparece o evento MDF-e autorizado quando a carga sai para entrega. Na entrega, o motorista fotografa o canhoto assinado e a foto chega no seu WhatsApp.</p></details>
       <details><summary>Vocês coletam no mesmo dia?</summary><p>Sim, na Grande São Paulo, para pedidos confirmados até as 11h. Pedidos confirmados depois disso são coletados no dia útil seguinte.</p></details>
       <details><summary>Que cargas vocês não transportam?</summary><p>Produtos perigosos, carga refrigerada, carga viva e mudanças residenciais.</p></details>
       <details><summary>Onde fica a Transportadora Azul?</summary><p>Na Rua Saturno, 8, Jardim Nova Coimbra, Cotia (SP), CEP 06702-170, perto da Rodovia Raposo Tavares e a cerca de 9 km do Rodoanel Mário Covas.</p></details>
@@ -806,22 +819,58 @@ p{margin:0}
       d.peso && `Peso: ${d.peso} kg`, d.volumes && `Volumes: ${d.volumes}`]);
   });
 
-  // rastreio: o placeholder acompanha o tipo de documento
-  const docSel = document.getElementById('f-doc');
-  docSel.addEventListener('change', () => { document.getElementById('f-nf').placeholder = docSel.value === 'CT-e' ? 'Número ou chave do CT-e' : 'Número ou chave da NF'; });
-
-  // rastreio: manda o documento no WhatsApp
+  // rastreio: com a chave do CT-e, abre a consulta pública da Sefaz; com a nota fiscal, pergunta no WhatsApp
+  const SEFAZ = 'https://www.cte.fazenda.gov.br/portal/consultaRecaptcha.aspx?tipoConsulta=resumo&tipoConteudo=cktLvUUKqh0=';
   const fr = document.getElementById('f-rastrear'), nr = document.getElementById('nota-rastrear');
+  const docSel = document.getElementById('f-doc'), campoRem = document.getElementById('campo-rem');
+  const legenda = document.getElementById('legenda-cte'), rBtn = document.getElementById('r-enviar'), rTxt = rBtn.querySelector('span');
+  const linkZap = ' <button type="button" class="link-zap" id="r-zap">Prefiro perguntar no WhatsApp</button>';
+  const perguntarZap = () => {
+    const d = Object.fromEntries(new FormData(fr)), num = d.nf.replace(/[\s.\-\/]/g, ''), cte = d.doc === 'CT-e';
+    if (!num) { nr.textContent = 'Informe ' + (cte ? 'a chave do CT-e' : 'o número da nota fiscal') + ' para consultar.'; fr.nf.focus(); return; }
+    const rotulo = cte ? (num.length === 44 ? 'Chave do CT-e' : 'Número do CT-e') : 'Número da nota fiscal';
+    abrirZap(['Olá! Quero saber onde está minha carga.', rotulo + ': ' + num, !cte && d.remetente.trim() && 'Remetente: ' + d.remetente.trim()]);
+  };
+  const nota = html => { nr.innerHTML = html; const b = document.getElementById('r-zap'); if (b) b.onclick = perguntarZap; };
+  const modo = () => {
+    const cte = docSel.value === 'CT-e';
+    fr.nf.placeholder = cte ? '44 dígitos da chave' : 'Número da nota fiscal';
+    campoRem.hidden = cte; legenda.hidden = !cte;
+    rBtn.className = cte ? 'btn btn-azul' : 'btn btn-zap';
+    rBtn.querySelector('use').setAttribute('href', cte ? '#i-busca' : '#i-zap');
+    rTxt.textContent = cte ? 'Consultar na Sefaz' : 'Consultar no WhatsApp';
+    nota(cte ? 'A chave é copiada e o site da Sefaz abre. Cole no campo e confirme o captcha.' + linkZap : 'Respondemos com a situação da entrega.');
+  };
+  // chave do CT-e: 44 dígitos, modelo 57 nas posições 21-22 e dígito verificador módulo 11
+  const chaveValida = k => {
+    if (!/^\d{44}$/.test(k) || k.slice(20, 22) !== '57') return false;
+    let soma = 0, peso = 2;
+    for (let i = 42; i >= 0; i--) { soma += Number(k[i]) * peso; peso = peso === 9 ? 2 : peso + 1; }
+    const dv = 11 - (soma % 11);
+    return (dv >= 10 ? 0 : dv) === Number(k[43]);
+  };
+  const copiar = txt => {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt).then(() => true, () => false);
+    const t = document.createElement('textarea'); t.value = txt; t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    t.remove(); return Promise.resolve(ok);
+  };
+  docSel.addEventListener('change', modo);
   fr.addEventListener('submit', e => {
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(fr));
-    const num = d.nf.replace(/[\s.\-\/]/g, '');
-    if (!num) { nr.textContent = `Informe o número ${d.doc === 'CT-e' ? 'do CT-e' : 'da nota fiscal'} para consultar.`; fr.nf.focus(); return; }
-    const cte = d.doc === 'CT-e';
-    const rotulo = (num.length === 44 ? 'Chave ' : 'Número ') + (cte ? 'do CT-e' : 'da nota fiscal');
-    nr.textContent = 'Abrindo o WhatsApp com a mensagem pronta.';
-    abrirZap(['Olá! Quero saber onde está minha carga.', `${rotulo}: ${num}`, d.remetente.trim() && `Remetente: ${d.remetente.trim()}`]);
+    if (docSel.value !== 'CT-e') { perguntarZap(); return; }
+    const chave = fr.nf.value.replace(/\D/g, '');
+    if (!chave) { nota('Informe a chave do CT-e. Ela tem 44 dígitos e vem no DACTE, o documento que acompanha a carga.'); fr.nf.focus(); return; }
+    if (!chaveValida(chave)) { nota('Essa chave não é de um CT-e válido (' + chave.length + ' dígitos). Confira os 44 números no DACTE.' + linkZap); fr.nf.focus(); return; }
+    // copia antes de abrir a aba: depois que a Sefaz abre, esta página perde o foco e a cópia falha
+    copiar(chave).then(ok => {
+      if (aba === null) { nota('O navegador bloqueou a nova aba. <a href="' + SEFAZ + '" target="_blank" rel="noopener">Abrir a consulta da Sefaz</a>' + (ok ? ' (a chave já está copiada).' : '')); return; }
+      nota((ok ? '<b>Chave copiada.</b> No site da Sefaz, cole no campo da chave e confirme o captcha.' : 'No site da Sefaz, digite a chave <b>' + chave + '</b> e confirme o captcha.') + linkZap);
+    });
+    const aba = window.open(SEFAZ, '_blank');
+    if (aba) aba.opener = null;
   });
+  modo();
 })();
 </script>
 </body>

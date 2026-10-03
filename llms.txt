@@ -33,7 +33,7 @@
 
 1. Cotação pelo WhatsApp ou pelo formulário do site.
 2. Coleta no mesmo dia para pedidos confirmados até 11h.
-3. Link de rastreio enviado pelo WhatsApp na saída do caminhão.
+3. A chave do CT-e é enviada pelo WhatsApp. Com ela, o cliente consulta o CT-e no portal público da Sefaz (www.cte.fazenda.gov.br): o evento "MDF-e autorizado" indica que a carga saiu para entrega e o "Comprovante de entrega" indica que foi entregue. O site valida a chave (44 dígitos, modelo 57) e abre a consulta.
 4. Foto do canhoto assinado enviada pelo WhatsApp na entrega.
 
 ## Páginas
