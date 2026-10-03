@@ -457,11 +457,13 @@ p{margin:0}
       <div class="painel" id="p-rastrear" role="tabpanel" aria-labelledby="aba-rastrear" hidden><form id="f-rastrear" novalidate>
         <h2>Onde está a sua carga?</h2>
         <div class="campos">
-          <div class="campo"><svg aria-hidden="true"><use href="#i-caixa"/></svg><label for="f-nf">Nota fiscal</label><input id="f-nf" name="nf" inputmode="numeric" placeholder="Número da NF"></div>
+          <div class="campo"><svg aria-hidden="true"><use href="#i-caixa"/></svg><label for="f-doc">Documento</label>
+            <select id="f-doc" name="doc"><option value="Nota fiscal">Nota fiscal</option><option value="CT-e">CT-e</option></select></div>
+          <div class="campo"><svg aria-hidden="true"><use href="#i-busca"/></svg><label for="f-nf">Número</label><input id="f-nf" name="nf" inputmode="numeric" autocomplete="off" placeholder="Número ou chave da NF"></div>
           <div class="campo"><svg aria-hidden="true"><use href="#i-origem"/></svg><label for="f-rem">Remetente</label><input id="f-rem" name="remetente" placeholder="Empresa que enviou"></div>
         </div>
         <button class="btn btn-zap" type="submit"><svg aria-hidden="true"><use href="#i-zap"/></svg>Consultar no WhatsApp</button>
-        <p class="painel-nota" id="nota-rastrear" aria-live="polite">Respondemos com a posição do caminhão e a previsão de entrega.</p>
+        <p class="painel-nota" id="nota-rastrear" aria-live="polite">Vale o número da nota fiscal, do CT-e ou a chave de 44 dígitos. Respondemos com a posição do caminhão e a previsão de entrega.</p>
       </form></div>
     </div>
   </div>
@@ -804,14 +806,21 @@ p{margin:0}
       d.peso && `Peso: ${d.peso} kg`, d.volumes && `Volumes: ${d.volumes}`]);
   });
 
-  // rastreio: manda a nota fiscal no WhatsApp
+  // rastreio: o placeholder acompanha o tipo de documento
+  const docSel = document.getElementById('f-doc');
+  docSel.addEventListener('change', () => { document.getElementById('f-nf').placeholder = docSel.value === 'CT-e' ? 'Número ou chave do CT-e' : 'Número ou chave da NF'; });
+
+  // rastreio: manda o documento no WhatsApp
   const fr = document.getElementById('f-rastrear'), nr = document.getElementById('nota-rastrear');
   fr.addEventListener('submit', e => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(fr));
-    if (!d.nf.trim()) { nr.textContent = 'Informe o número da nota fiscal para consultar.'; fr.nf.focus(); return; }
+    const num = d.nf.replace(/[\s.\-\/]/g, '');
+    if (!num) { nr.textContent = `Informe o número ${d.doc === 'CT-e' ? 'do CT-e' : 'da nota fiscal'} para consultar.`; fr.nf.focus(); return; }
+    const cte = d.doc === 'CT-e';
+    const rotulo = (num.length === 44 ? 'Chave ' : 'Número ') + (cte ? 'do CT-e' : 'da nota fiscal');
     nr.textContent = 'Abrindo o WhatsApp com a mensagem pronta.';
-    abrirZap(['Olá! Quero saber onde está minha carga.', `Nota fiscal: ${d.nf.trim()}`, d.remetente.trim() && `Remetente: ${d.remetente.trim()}`]);
+    abrirZap(['Olá! Quero saber onde está minha carga.', `${rotulo}: ${num}`, d.remetente.trim() && `Remetente: ${d.remetente.trim()}`]);
   });
 })();
 </script>
