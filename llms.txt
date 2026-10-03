@@ -7,7 +7,8 @@
 - Endereço: Rua Saturno, 8, Jardim Nova Coimbra, Cotia (SP), CEP 06702-170. Fica perto da Rodovia Raposo Tavares (SP-270), a cerca de 9 km do Rodoanel Mário Covas.
 - Contato: WhatsApp e telefone (11) 99585-4072. Cotação em até 30 minutos no horário de atendimento.
 - Atendimento: segunda a sexta, 7h às 18h; sábado, 7h às 12h.
-- Frota própria (11 veículos): 2 VUCs baú (até 3 t), 3 tocos baú (até 6 t), 4 trucks baú (até 14 t) e 2 carretas sider (até 27 t). Todos com rastreador por satélite e revisão a cada 10 mil km; idade média de 5 anos. Nenhum frete é repassado a terceiros.
+- Frota própria (11 veículos): 2 VUCs baú (até 3 t), 3 tocos baú (até 6 t), 4 trucks baú (até 14 t) e 2 graneleiros com lona (até 14 t). Todos com rastreador por satélite e revisão a cada 10 mil km; idade média de 5 anos. Nenhum frete é repassado a terceiros.
+- Estrutura: galpão com cobertura para carga e descarga e garagem coberta na base de Cotia.
 - Volume: cerca de 1.900 entregas por mês; 98% entregues no prazo em 2025.
 - Documentação: RNTRC ativo na ANTT, seguro RCTR-C e RC-DC em toda viagem (até o valor da nota fiscal), CT-e e MDF-e emitidos por viagem.
 - Não transporta: produtos perigosos, carga refrigerada, carga viva e mudanças residenciais.
@@ -23,7 +24,7 @@
 ## Serviços
 
 - Carga fracionada: de 1 caixa a 10 paletes, cobrança pelo espaço ocupado; abaixo de 30 kg vale a taxa mínima.
-- Lotação: caminhão exclusivo, direto da doca do cliente ao destino, sem transbordo.
+- Lotação: truck baú ou graneleiro exclusivo, direto da doca do cliente ao destino, sem transbordo.
 - Entrega no centro com VUC: os VUCs podem circular na Zona de Máxima Restrição de Circulação (ZMRC) de São Paulo.
 - Transporte dedicado: veículo e motorista fixos por contrato mensal.
 - Coleta programada: coleta em dias e horário fixos.
@@ -37,4 +38,4 @@
 
 ## Páginas
 
-- [Home](https://jgdini.github.io/transportadora-azul/): serviços, frota, prazos, perguntas frequentes e formulário de cotação.
+- [Home](https://jgdini.github.io/transportadora-azul/): serviços, frota, prazos, perguntas frequentes e bloco de cotação e rastreio pelo WhatsApp.
