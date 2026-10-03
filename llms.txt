@@ -1,6 +1,6 @@
-# Transportadora Azul
+# ZUPO Transportadora
 
-> Transportadora rodoviária de cargas em Cotia (SP), fundada em 2008, com frota própria de 11 caminhões. Faz carga fracionada, lotação, entregas no centro expandido de São Paulo com VUC, transporte dedicado e coleta programada.
+> Transportadora rodoviária de cargas em Cotia (SP), fundada em 2008, com frota própria de 11 caminhões. Slogan: "Seu destino, nosso compromisso". Toda viagem sai com seguro RCTR-C e RC-DC até o valor da nota fiscal e com rastreamento por satélite 24 horas. Faz carga fracionada, lotação, entregas no centro expandido de São Paulo com VUC, transporte dedicado e coleta programada.
 
 ## Fatos principais
 
@@ -12,6 +12,13 @@
 - Volume: cerca de 1.900 entregas por mês; 98% entregues no prazo em 2025.
 - Documentação: RNTRC ativo na ANTT, seguro RCTR-C e RC-DC em toda viagem (até o valor da nota fiscal), CT-e e MDF-e emitidos por viagem.
 - Não transporta: produtos perigosos, carga refrigerada, carga viva e mudanças residenciais.
+
+## Segurança da carga
+
+- Coleta: o motorista confere os volumes com a nota fiscal e fotografa a carga no caminhão.
+- Estrada: rastreador por satélite em todos os caminhões; a central bloqueia o veículo se ele sair do trajeto.
+- Seguro: RCTR-C (acidente) e RC-DC (roubo e desvio), até o valor da nota fiscal. Em caso de sinistro, a ZUPO abre o processo com a seguradora e acompanha até a indenização.
+- Entrega: foto do canhoto assinado enviada pelo WhatsApp.
 
 ## Prazos a partir de Cotia
 

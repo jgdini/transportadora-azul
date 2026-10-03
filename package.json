@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "imagens": "node scripts/imagens.mjs && node scripts/og.mjs && node scripts/fotos.mjs"
+    "imagens": "node scripts/logo.mjs && node scripts/og.mjs && node scripts/fotos.mjs"
   },
   "devDependencies": {
     "sharp": "0.34.5"

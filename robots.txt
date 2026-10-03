@@ -1,4 +1,4 @@
-# Modelo de site da Transportadora Azul (protótipo para aprovação).
+# Modelo de site da ZUPO Transportadora (protótipo para aprovação).
 User-agent: *
 Allow: /
 
