@@ -1,0 +1,21 @@
+# Modelo de site da Transportadora Azul (protótipo para aprovação).
+User-agent: *
+Allow: /
+
+# Buscadores de IA (GEO/AEO) liberados
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://jgdini.github.io/transportadora-azul/sitemap.xml

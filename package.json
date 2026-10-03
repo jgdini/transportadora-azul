@@ -1,0 +1,7 @@
+{
+  "name": "transportadora-azul",
+  "private": true,
+  "type": "module",
+  "scripts": { "imagens": "node scripts/imagens.mjs" },
+  "devDependencies": { "sharp": "0.34.5" }
+}
