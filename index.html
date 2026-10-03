@@ -59,10 +59,6 @@
 @font-face{font-family:"Atkinson";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/atkinson-hyperlegible-400.woff2) format("woff2")}
 @font-face{font-family:"Atkinson";font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/atkinson-hyperlegible-700.woff2) format("woff2")}
 @font-face{font-family:"Overpass Mono";font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/overpass-mono-600.woff2) format("woff2")}
-/* fontes reserva com a largura média das fontes do site: a troca de fonte não desloca o layout */
-@font-face{font-family:"Overpass Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Arial");font-weight:700 900;size-adjust:98%}
-@font-face{font-family:"Atkinson Fallback";font-weight:400;src:local("Arial"),local("ArialMT");size-adjust:98.4%}
-@font-face{font-family:"Atkinson Fallback";font-weight:700;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:99%}
 
 :root{
   --marinho:#0a1c3a;    /* fundo do topo e do rodapé */
@@ -77,8 +73,8 @@
   --cinza:#4a5568;
   --zap:#25d366;
   --zap-esc:#128c4a;
-  --display:"Overpass","Overpass Fallback",Arial,sans-serif;
-  --texto:"Atkinson","Atkinson Fallback",Arial,sans-serif;
+  --display:"Overpass",Arial,sans-serif;
+  --texto:"Atkinson",Arial,sans-serif;
   --mono:"Overpass Mono",ui-monospace,Consolas,monospace;
   --max:1240px;
   --r:28px;     /* canto dos blocos */
@@ -147,7 +143,7 @@ p{margin:0}
 .hero-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 55%;z-index:-2}
 .hero-foto::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,28,58,0) 30%,rgba(10,28,58,.86) 82%),linear-gradient(90deg,rgba(10,28,58,.55),rgba(10,28,58,0) 60%)}
 .hero-foto .chip{background:rgba(255,255,255,.16);color:#fff;align-self:flex-start}
-.hero h1{font-size:clamp(2.5rem,5.2vw,4.6rem);font-weight:900;margin:16px 0 14px;max-width:12ch}
+.hero h1{font-size:clamp(2.5rem,5.2vw,4.6rem);font-weight:900;margin:16px 0 14px}
 .hero h1 span{color:var(--faixa)}
 .hero-foto p{font-size:1.12rem;max-width:46ch;color:#e3eaf7}
 
@@ -438,7 +434,7 @@ p{margin:0}
     <div class="hero-foto">
       <img src="assets/img/frota-tres-960.webp" srcset="assets/img/frota-tres-480.webp 480w, assets/img/frota-tres-720.webp 720w, assets/img/frota-tres-960.webp 960w, assets/img/frota-tres-1400.webp 1400w" sizes="(min-width: 1000px) 700px, calc(100vw - 32px)" width="1400" height="1050" alt="Três caminhões da Transportadora Azul estacionados lado a lado no pátio, com um VW Constellation vermelho à frente" fetchpriority="high">
       <span class="chip">Cotia (SP) · desde 2008</span>
-      <h1 id="h1">Coleta de manhã, <span>entrega à tarde.</span></h1>
+      <h1 id="h1">Coleta de manhã,<br> <span>entrega à tarde.</span></h1>
       <p>11 caminhões próprios, base a 9 km do Rodoanel. Pedido confirmado até as 11h é coletado e entregue no mesmo dia na Grande São Paulo.</p>
     </div>
 
