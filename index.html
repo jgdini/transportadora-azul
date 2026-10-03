@@ -149,15 +149,15 @@ p{margin:0}
 
 .cotar{background:#fff;border-radius:var(--r);padding:12px;display:flex;flex-direction:column}
 .abas{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--fundo);border-radius:18px;padding:6px}
-.abas button{font:inherit;font-family:var(--display);font-weight:800;font-size:1rem;border:0;border-radius:13px;padding:13px 10px 10px;background:transparent;color:var(--cinza);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.abas button{font:inherit;font-family:var(--display);font-weight:800;font-size:1rem;border:0;border-radius:13px;padding:13px 10px 10px;background:transparent;color:var(--cinza);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
 .abas button svg{width:20px;height:20px}
 .abas button[aria-selected=true]{background:#fff;color:var(--placa);box-shadow:0 2px 8px rgba(15,26,44,.08)}
 .painel{padding:22px 16px 10px;display:flex;flex-direction:column;gap:14px;flex:1}
 .painel[hidden]{display:none}
 .painel form{display:contents}
-.painel h2{font-size:1.45rem}
+.painel h2{font-size:1.45rem;white-space:nowrap}
 .campos{border:1.5px solid var(--borda);border-radius:18px;overflow:hidden}
-.campo{display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1.5px solid var(--borda);min-height:58px}
+.campo{display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1.5px solid var(--borda);height:58px}
 .campo:last-child{border-bottom:0}
 .campo svg{width:20px;height:20px;color:var(--azul);flex:none}
 .campo label{flex:none;font-weight:700;font-size:.9rem;color:var(--cinza);width:5.6em}
@@ -167,8 +167,8 @@ p{margin:0}
 .dupla{display:grid;grid-template-columns:1fr 1fr}
 .dupla .campo:first-child{border-right:1.5px solid var(--borda)}
 .dupla .campo label{width:auto}
-.painel .btn{width:100%;margin-top:auto}
-.painel-nota{font-size:.88rem;color:var(--cinza);text-align:center}
+.painel .btn{width:100%;margin-top:auto;white-space:nowrap}
+.painel-nota{font-size:.88rem;color:var(--cinza);text-align:center;min-height:2.9em}
 .painel-nota b{color:var(--tinta)}
 .btn-azul{background:var(--azul);color:#fff}
 .btn-azul:hover{background:#174fb0}
@@ -377,6 +377,9 @@ p{margin:0}
   .zap-btn .bola svg{color:#fff;width:34px;height:34px}
 }
 @media (max-width:420px){
+  .abas button{font-size:.95rem;gap:6px}
+  .abas button svg{display:none}
+  .painel h2{font-size:1.3rem}
   .campo label{width:4.8em;font-size:.85rem}
   .dupla{grid-template-columns:1fr}
   .dupla .campo:first-child{border-right:0;border-bottom:1.5px solid var(--borda)}
@@ -455,7 +458,7 @@ p{margin:0}
             <div class="campo"><label for="f-volumes">Volumes</label><input id="f-volumes" name="volumes" placeholder="4 paletes"></div>
           </div>
         </div>
-        <button class="btn btn-zap" type="submit"><svg aria-hidden="true"><use href="#i-zap"/></svg>Receber cotação no WhatsApp</button>
+        <button class="btn btn-zap" type="submit"><svg aria-hidden="true"><use href="#i-zap"/></svg>Cotar pelo WhatsApp</button>
         <p class="painel-nota" id="nota-cotar" aria-live="polite">Resposta em até <b>30 minutos</b>, de segunda a sábado.</p>
       </form></div>
       <div class="painel" id="p-rastrear" role="tabpanel" aria-labelledby="aba-rastrear" hidden><form id="f-rastrear" novalidate>
