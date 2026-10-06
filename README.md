@@ -8,6 +8,14 @@ Modelo de site de página única para a ZUPO Transportadora (Cotia, SP). O repos
 node scripts/serve.mjs 5600
 ```
 
+## Páginas internas
+
+`scripts/paginas.mjs` gera `carga-fracionada.html`, `lotacao.html`, `entrega-vuc-centro-sp.html` e `fretes-saindo-de-cotia.html` a partir do `index.html` (CSS, ícones, cabeçalho, rodapé e botão do WhatsApp) e reescreve o `sitemap.xml`. Depois de editar a home, rode:
+
+```bash
+node scripts/paginas.mjs
+```
+
 ## Imagens
 
 `npm install` e depois `npm run imagens`. O comando roda:
@@ -20,4 +28,4 @@ O vídeo do pátio (`assets/img/patio.mp4`, 10 s, sem áudio) foi cortado e comp
 
 ## Dados de briefing
 
-Estes dados foram inventados para o modelo e precisam ser confirmados com o cliente: ano de fundação (2008), composição da frota (2 VUCs, 3 tocos, 4 trucks e 2 graneleiros), capacidades, prazos, 1.900 entregas/mês, 98% no prazo, peso mínimo de 30 kg, cotação em 30 min, seguros, revisão a cada 10 mil km e horário de atendimento. Também faltam CNPJ, e-mail, domínio e redes sociais.
+Estes dados foram inventados para o modelo e precisam ser confirmados com o cliente: ano de fundação (2008), composição da frota (2 VUCs, 3 tocos, 4 trucks e 2 graneleiros), capacidades, prazos, 1.900 entregas/mês, 98% no prazo, peso mínimo de 30 kg, cotação em 30 min, seguros, revisão a cada 10 mil km e horário de atendimento. Também faltam CNPJ, e-mail, domínio, redes sociais e o perfil no Google (de onde vêm as coordenadas para o schema). Pelo ViaCEP, o CEP 06702-170 fica no bairro Recanto Vista Alegre, não no Jardim Nova Coimbra: confirmar o endereço com o cliente.

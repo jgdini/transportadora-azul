@@ -45,4 +45,8 @@
 
 ## Páginas
 
-- [Home](https://jgdini.github.io/transportadora-azul/): serviços, frota, prazos, perguntas frequentes e bloco de cotação e rastreio pelo WhatsApp.
+- [Home](https://jgdini.github.io/transportadora-azul/): trajeto da carga e seguro, serviços, frota, prazos, perguntas frequentes, cotação e rastreio pelo CT-e.
+- [Carga fracionada](https://jgdini.github.io/transportadora-azul/carga-fracionada.html): de 1 caixa a 10 paletes, cálculo pelo peso real ou cubado (300 kg/m³), taxa mínima abaixo de 30 kg.
+- [Lotação](https://jgdini.github.io/transportadora-azul/lotacao.html): caminhão exclusivo sem transbordo; truck baú e graneleiro até 14 t, toco baú até 6 t.
+- [Entrega com VUC no centro de São Paulo](https://jgdini.github.io/transportadora-azul/entrega-vuc-centro-sp.html): entregas na Zona de Máxima Restrição de Circulação (ZMRC) com os 2 VUCs baú da frota (até 3 t).
+- [Fretes saindo de Cotia](https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html): rotas, distâncias aproximadas e prazos para Sorocaba, Jundiaí, Campinas, Baixada Santista, São José dos Campos e estados vizinhos.
