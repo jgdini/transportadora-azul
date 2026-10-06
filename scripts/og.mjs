@@ -1,7 +1,7 @@
 // Imagem de compartilhamento (1200x630): foto da frota escurecida, logo da ZUPO e a promessa de segurança.
 import sharp from 'sharp';
-const foto = await sharp('Arquivo/Fotos/WhatsApp Image 2026-10-02 at 21.54.32 (2).jpeg').rotate()
-  .resize(1200, 630, { fit: 'cover' }).modulate({ saturation: 0.7, brightness: 0.8 }).toBuffer();
+const foto = await sharp('Arquivo/Fotos/Fotos Novas (5).PNG').rotate()
+  .resize(1200, 630, { fit: 'cover' }).modulate({ saturation: 0.8, brightness: 0.85 }).toBuffer();
 const veu = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b0b0c" stop-opacity=".96"/><stop offset=".55" stop-color="#0b0b0c" stop-opacity=".7"/><stop offset="1" stop-color="#0b0b0c" stop-opacity=".1"/></linearGradient></defs>
   <rect width="1200" height="630" fill="url(#g)"/>

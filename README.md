@@ -14,7 +14,7 @@ node scripts/serve.mjs 5600
 
 - `scripts/logo.mjs`: recorta o logo de `Arquivo/Logo ZUPO Transportadora Premium.png`, tira o fundo preto e gera o logo do cabeçalho, o do rodapé, a marca (Z) e os ícones.
 - `scripts/og.mjs`: imagem de compartilhamento (`assets/img/og-image.jpg`) com a foto da frota.
-- `scripts/fotos.mjs`: converte as fotos de `Arquivo/Fotos` para WebP em vários tamanhos.
+- `scripts/fotos.mjs`: converte as 6 fotos tratadas (`Arquivo/Fotos/Fotos Novas (1–6).PNG`) para WebP em vários tamanhos.
 
 O vídeo do pátio (`assets/img/patio.mp4`, 10 s, sem áudio) foi cortado e comprimido com ffmpeg a partir do vídeo original. As fotos e o vídeo originais ficam em `Arquivo/`, que não vai para o repositório.
 
