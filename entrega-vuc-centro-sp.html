@@ -119,12 +119,27 @@ p{margin:0}
 }
 
 /* topo: foto em tela cheia, texto à esquerda, cotação à direita */
-.hero{position:relative;isolation:isolate;color:#fff;background:var(--preto)}
+.hero{position:relative;isolation:isolate;overflow:clip;color:#fff;background:var(--preto)}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;z-index:-2}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.78) 42%,rgba(11,11,12,.35) 75%,rgba(11,11,12,.55) 100%),linear-gradient(180deg,rgba(11,11,12,0) 60%,rgba(11,11,12,.9) 100%)}
 .hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:56px;align-items:center;padding-top:88px;padding-bottom:56px;min-height:640px}
 .hero-grid>*,.trajeto-grid>*,.frota-topo>*,.cob-grid>*,.faq-grid>*,.rodape-grid>*{min-width:0}
 .hero h1{font-size:clamp(2.4rem,5.2vw,4.6rem);margin:20px 0 22px}
+.hero h1 .l{display:block}
+.hero h1 .l>span{display:block}
+/* abertura do topo em CSS puro: começa no primeiro quadro, sem esperar JavaScript, e termina visível */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1 .l{overflow:clip;padding:0 .12em .14em 0;margin:0 -.12em -.14em 0}
+  .hero h1 .l>span{animation:sobe 1s cubic-bezier(.16,1,.3,1) both}
+  .hero h1 .l+.l>span{animation-delay:.12s}
+  .hero .rotulo{animation:surge .6s .05s cubic-bezier(.16,1,.3,1) both}
+  .hero-txt p{animation:surge .7s .35s cubic-bezier(.16,1,.3,1) both}
+  .hero .cotar{animation:surge .8s .25s cubic-bezier(.16,1,.3,1) both}
+  .garantias li{animation:surge .5s cubic-bezier(.16,1,.3,1) both}
+  .garantias li:nth-child(1){animation-delay:.55s}.garantias li:nth-child(2){animation-delay:.63s}.garantias li:nth-child(3){animation-delay:.71s}.garantias li:nth-child(4){animation-delay:.79s}
+  @keyframes sobe{from{transform:translateY(112%)}}
+  @keyframes surge{from{opacity:0;transform:translateY(14px)}}
+}
 .hero-txt p{font-size:1.1rem;max-width:48ch;color:#d5d8dd}
 .garantias{list-style:none;margin:0;padding:22px 0 30px;border-top:1px solid var(--linha);display:flex;flex-wrap:wrap;gap:10px 34px;font-size:.92rem;color:var(--prata)}
 .garantias li{display:flex;align-items:center;gap:10px}
@@ -178,17 +193,6 @@ p{margin:0}
 .seguro-faixa svg{width:40px;height:40px;color:var(--ouro-texto)}
 .seguro-faixa h3{font-size:1.3rem;font-weight:600;margin-bottom:6px}
 .seguro-faixa p{color:var(--cinza)}
-@media (prefers-reduced-motion:no-preference){
-  .estrada .asfalto,.estrada .fio{stroke-dasharray:1600;stroke-dashoffset:1600;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)}
-  .estrada .faixa{opacity:0;transition:opacity .6s 1.2s}
-  .estrada .marco{transform:scale(.6);opacity:0;transition:transform .4s,opacity .4s}
-  .estrada.viu .asfalto,.estrada.viu .fio{stroke-dashoffset:0}
-  .estrada.viu .faixa{opacity:1}
-  .estrada.viu .marco{transform:none;opacity:1}
-  .estrada.viu .parada:nth-child(2) .marco{transition-delay:.35s}
-  .estrada.viu .parada:nth-child(3) .marco{transition-delay:.7s}
-  .estrada.viu .parada:nth-child(4) .marco{transition-delay:1.05s}
-}
 
 /* serviços em lista editorial */
 .lista-serv{list-style:none;margin:48px 0 0;padding:0;border-top:1px solid var(--borda)}
@@ -217,7 +221,7 @@ p{margin:0}
 .video-frota figcaption{position:absolute;left:18px;bottom:16px;font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ouro-claro);background:rgba(11,11,12,.6);border-radius:999px;padding:7px 14px}
 .frota-faixa{margin-top:72px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .frota-trilho{display:flex;width:max-content;gap:16px;padding:4px 0;animation:frota-passa 48s linear infinite}
-.frota-faixa:hover .frota-trilho,.frota-faixa:focus-within .frota-trilho{animation-play-state:paused}
+.frota-faixa:hover .frota-trilho,.frota-faixa:focus-within .frota-trilho,.frota-trilho.parado{animation-play-state:paused}
 @keyframes frota-passa{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
 .foto-card{flex:none;width:300px;margin:0;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;background:var(--carvao)}
 .foto-card img{aspect-ratio:4/3.3;width:100%;height:auto;object-fit:cover}
@@ -244,7 +248,7 @@ p{margin:0}
 .prazos dd.hoje{font-weight:600;color:var(--ouro-texto)}
 
 /* chamada final */
-.chamada{position:relative;isolation:isolate;color:#fff;background:var(--preto);padding:120px 0}
+.chamada{position:relative;isolation:isolate;overflow:clip;color:#fff;background:var(--preto);padding:120px 0}
 .chamada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:-2}
 .chamada::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,12,.93) 0%,rgba(11,11,12,.72) 50%,rgba(11,11,12,.25) 100%)}
 .chamada h2{font-size:clamp(2.2rem,4.6vw,3.8rem);margin:18px 0 18px}
@@ -307,6 +311,16 @@ p{margin:0}
 .zap-opcoes a:hover{background:#dcf8c6}
 .zap-opcoes a::after{content:"›";font-size:1.4rem;line-height:.6}
 
+/* motion (assets/js/motion.js): a máscara das linhas do título não corta o itálico nem as descendentes */
+.titulo-linha-mask{padding:0 .12em .14em 0;margin:0 -.12em -.14em 0}
+.com-lenis{scroll-padding-top:0}
+/* transição entre as páginas do site (View Transitions entre documentos) */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  .topo{view-transition-name:topo}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
+}
+
 /* responsivo */
 @media (max-width:1000px){
   .sec{padding:80px 0}
@@ -315,7 +329,7 @@ p{margin:0}
   .trajeto-head,.frota-topo,.cob-grid,.faq-grid{grid-template-columns:1fr;gap:28px}
   .estrada svg.pista{display:none}
   .paradas{margin:0;grid-template-columns:1fr;gap:0;padding-left:56px}
-  .paradas::before{content:"";position:absolute;left:18px;top:6px;bottom:6px;width:4px;border-radius:4px;background:var(--asfalto);box-shadow:-2px 0 0 var(--ouro)}
+  .paradas::before{content:"";position:absolute;left:18px;top:6px;bottom:6px;width:4px;border-radius:4px;background:var(--asfalto);box-shadow:-2px 0 0 var(--ouro);transform-origin:top;transform:scaleY(var(--linha,1))}
   .parada{position:relative;padding-bottom:34px}
   .parada .marco{position:absolute;left:-58px;top:-4px;margin:0}
   .parada h3{margin-top:0}
@@ -358,7 +372,7 @@ p{margin:0}
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}
 .trilha a{color:var(--prata);text-decoration:none}
 .trilha a:hover{color:var(--ouro-claro)}
-.topo-int{position:relative;isolation:isolate;padding:72px 0 80px;color:#fff;background:var(--preto)}
+.topo-int{position:relative;isolation:isolate;overflow:clip;padding:72px 0 80px;color:#fff;background:var(--preto)}
 .topo-int>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .topo-int::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,12,.95) 0%,rgba(11,11,12,.8) 50%,rgba(11,11,12,.45) 100%)}
 .topo-int h1{font-size:clamp(2.2rem,4.6vw,3.8rem);margin:18px 0 18px;max-width:20ch}
@@ -558,6 +572,21 @@ p{margin:0}
     if (!aberto) { status.textContent = 'Deixe sua mensagem, respondemos a partir das 7h'; status.classList.add('fora'); }
   } catch (e) {}
 })();
+</script>
+<script>
+/* animações: o GSAP, o Lenis e o motion.js chegam na primeira interação (rolagem, toque, clique, tecla)
+   ou 3 s depois do load, o que vier antes. Assim ficam fora do caminho da foto do topo (LCP). */
+addEventListener('load', () => {
+  let feito = false;
+  const carregar = () => {
+    if (feito) return; feito = true;
+    ['vendor/gsap.min.js', 'vendor/ScrollTrigger.min.js', 'vendor/SplitText.min.js', 'vendor/lenis.min.js', 'motion.js'].forEach(f => {
+      const s = document.createElement('script'); s.src = 'assets/js/' + f; s.async = false; document.body.appendChild(s);
+    });
+  };
+  ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => addEventListener(ev, carregar, { once: true, passive: true }));
+  setTimeout(carregar, 3000);
+}, { once: true });
 </script>
 </body>
 </html>

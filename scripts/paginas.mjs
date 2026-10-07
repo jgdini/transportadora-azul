@@ -23,7 +23,7 @@ const estiloInterno = `<style>
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}
 .trilha a{color:var(--prata);text-decoration:none}
 .trilha a:hover{color:var(--ouro-claro)}
-.topo-int{position:relative;isolation:isolate;padding:72px 0 80px;color:#fff;background:var(--preto)}
+.topo-int{position:relative;isolation:isolate;overflow:clip;padding:72px 0 80px;color:#fff;background:var(--preto)}
 .topo-int>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .topo-int::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,12,.95) 0%,rgba(11,11,12,.8) 50%,rgba(11,11,12,.45) 100%)}
 .topo-int h1{font-size:clamp(2.2rem,4.6vw,3.8rem);margin:18px 0 18px;max-width:20ch}
@@ -274,6 +274,21 @@ ${rodape}
 ${zap.trimEnd()}
 
 ${scriptInterno}
+<script>
+/* animações: o GSAP, o Lenis e o motion.js chegam na primeira interação (rolagem, toque, clique, tecla)
+   ou 3 s depois do load, o que vier antes. Assim ficam fora do caminho da foto do topo (LCP). */
+addEventListener('load', () => {
+  let feito = false;
+  const carregar = () => {
+    if (feito) return; feito = true;
+    ['vendor/gsap.min.js', 'vendor/ScrollTrigger.min.js', 'vendor/SplitText.min.js', 'vendor/lenis.min.js', 'motion.js'].forEach(f => {
+      const s = document.createElement('script'); s.src = 'assets/js/' + f; s.async = false; document.body.appendChild(s);
+    });
+  };
+  ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => addEventListener(ev, carregar, { once: true, passive: true }));
+  setTimeout(carregar, 3000);
+}, { once: true });
+</script>
 </body>
 </html>
 `;
