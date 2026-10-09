@@ -39,7 +39,6 @@
   });
 
   /* ---------- contadores (98%, 1.900, 18) ---------- */
-  const fmt = n => Math.round(n).toLocaleString('pt-BR');
   const contadores = qa('.count').filter(el => el.getBoundingClientRect().top > innerHeight * 0.92);
 
   /* ---------- faixa da frota: pausa com o mouse em cima e fora da tela ----------
@@ -102,21 +101,20 @@
       onEnterBack: b => gsap.to(b, { opacity: 1, y: 0, duration: 0.5, overwrite: true }),
     });
 
-    /* números (98%, 1.900, 18): o bloco sobe, o número conta até o valor e uma barra azul cresce embaixo */
+    /* números: o 98% ganha um anel que se preenche até o valor; 1.900 e 18 sobem de uma máscara */
     contadores.forEach(el => {
-      const alvo = parseInt(el.dataset.target, 10) || 0, obj = { v: 0 };
+      const alvo = parseInt(el.dataset.target, 10) || 0;
       const bloco = el.closest('.numeros > div') || el.parentElement;
-      const barra = document.createElement('span');
-      barra.className = 'barra-num';
-      barra.setAttribute('aria-hidden', 'true');
-      bloco.appendChild(barra);
-      el.textContent = '0';
-      gsap.set(bloco, { opacity: 0, y: 40 });
-      gsap.set(barra, { scaleX: 0 });
+      const b = el.closest('b');
+      const mascara = document.createElement('span');
+      mascara.className = 'numero-mask';
+      b.parentNode.insertBefore(mascara, b);
+      mascara.appendChild(b);
+      gsap.set(b, { yPercent: 110 });
       const tl = gsap.timeline({ paused: true });
-      tl.to(bloco, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-        .to(obj, { v: alvo, duration: 2, ease: 'power3.out', onUpdate: () => { el.textContent = fmt(obj.v); } }, 0.1)
-        .to(barra, { scaleX: 1, duration: 0.9, ease: 'expo.out' }, 0.3);
+      tl.to(b, { yPercent: 0, duration: 1, ease: 'expo.out' });
+      const anel = bloco.querySelector('.progresso');
+      if (anel) tl.to(anel, { strokeDashoffset: 100 - alvo, duration: 1.8, ease: 'power3.out' }, 0.1);
       ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
     });
 
