@@ -186,24 +186,24 @@
   });
 
   // por último, para os pins de cima já estarem calculados (senão a posição desta seção sai errada)
-  /* ---------- caminhão que anda de lado pela pista conforme a rolagem ---------- */
-  const rota = q('#rota'), rCam = q('#rota-caminhao'), rDoca = q('#rota-doca'), rFaixas = q('#rota-faixas');
-  if (rota && rCam && rDoca && rFaixas && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const rodas = qa('#rota-caminhao .roda');
+  /* ---------- caminhão que desce pela lateral e some na doca no fim da página ---------- */
+  const rota = q('#rota'), rCam = q('#rota-caminhao'), rDoca = q('#rota-doca'), rLinha = q('#rota-linha');
+  if (rota && rCam && rDoca && rLinha && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const palco = q('.rota-palco');
-    const desenhaRota = pSecao => {
-      // o caminhão chega à doca em 80% da seção fixa; o resto é a página descendo com ele parado
-      const p = Math.min(1, pSecao / 0.8);
-      const largura = palco.clientWidth, camW = rCam.offsetWidth, docaW = rDoca.offsetWidth;
-      // para com a frente da cabine encostada na porta da doca (a porta fica a ~23% da largura da doca)
-      const parada = largura - docaW + docaW * 0.2 - camW;
-      const x = (parada - 40) * p;
-      rCam.style.transform = 'translate3d(' + x + 'px, 0, 0)';
-      // as rodas giram na proporção do caminho andado (raio de ~5% da largura do caminhão)
-      const giro = (x / (camW * 0.05)) * (180 / Math.PI);
-      rodas.forEach(r => { r.style.transform = 'rotate(' + giro + 'deg)'; });
-      rFaixas.style.transform = 'translate3d(' + (-x * 1.6) + 'px, 0, 0)';
-      rDoca.classList.toggle('chegou', p >= 1);
+    const desenhaRota = p => {
+      const altura = palco.clientHeight, camH = rCam.offsetHeight, docaH = rDoca.offsetHeight;
+      const inicio = 150; // logo abaixo do cabeçalho fixo
+      // o caminhão para com metade da carroceria já dentro da doca: a doca cobre o resto
+      const fim = altura - docaH + camH * 0.5;
+      const y = inicio + (fim - inicio) * p;
+      rCam.style.transform = 'translate3d(0, ' + y + 'px, 0)';
+      // some aos poucos conforme entra: a partir de 75% do caminho fica um pouco menor e mais transparente
+      const entrada = Math.max(0, (p - 0.75) / 0.25);
+      rCam.style.opacity = String(1 - entrada * 0.5);
+      rCam.style.scale = String(1 - entrada * 0.08);
+      // as faixas da pista andam para cima, na direção contrária ao caminhão
+      rLinha.style.transform = 'translate3d(0, ' + (-y * 1.3) + 'px, 0)';
+      rDoca.classList.toggle('chegou', p >= 0.98);
     };
     ScrollTrigger.create({
       trigger: rota, start: 'top top', end: 'bottom bottom',
