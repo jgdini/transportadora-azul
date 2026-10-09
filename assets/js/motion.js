@@ -130,6 +130,8 @@
             : { trigger: '#estrada', start: 'top 80%', end: 'bottom 45%', scrub: 0.6 },
         });
         tl.to(pista, { clipPath: 'inset(-40% 0% -40% 0%)', ease: 'none', duration: 1 }, 0);
+        const brilho = q('#estrada .fio-brilho');
+        if (brilho) tl.fromTo(brilho, { strokeDashoffset: 0 }, { strokeDashoffset: -100, ease: 'none', duration: 1 }, 0);
         // o caminhão anda sobre a estrada, seguindo a ponta da revelação (coordenadas do SVG: 1200x90)
         const camEl = q('#estrada-cam'), estradaEl = q('#estrada');
         if (camEl && estradaEl) {
@@ -144,8 +146,12 @@
         }
         paradas.forEach((p, i) => {
           const t = 0.1 + i * 0.25; // cada marco fica no centro da sua coluna (12,5%, 37,5%...)
+          const marco = q('.marco', p);
+          const anel = document.createElement('span'); anel.className = 'anel'; anel.setAttribute('aria-hidden', 'true');
+          marco.appendChild(anel);
           tl.to(p, { opacity: 1, duration: 0.14, ease: 'none' }, t)
-            .to(q('.marco', p), { scale: 1, duration: 0.14, ease: 'back.out(2.2)' }, t);
+            .to(marco, { scale: 1, duration: 0.14, ease: 'back.out(2.2)' }, t)
+            .fromTo(anel, { scale: 1, opacity: 0.9 }, { scale: 2.6, opacity: 0, duration: 0.5, ease: 'power2.out' }, t + 0.1);
         });
         if (seguro) tl.to(seguro, { opacity: 1, y: 0, duration: 0.16, ease: 'power2.out' }, 1);
         if (cabe) tl.to({}, { duration: 0.18 }); // segura a cena completa um instante antes de soltar
