@@ -40,6 +40,7 @@
 
   /* ---------- contadores (98%, 1.900, 18) ---------- */
   const contadores = qa('.count');
+  const pendentesNumeros = [];
 
   /* ---------- faixa da frota: pausa com o mouse em cima e fora da tela ----------
      Usa pointerenter/pointerleave (e não :hover, que pode ficar travado depois de uma rolagem)
@@ -115,9 +116,7 @@
       tl.to(b, { yPercent: 0, duration: 1, ease: 'expo.out' });
       const anel = bloco.querySelector('.progresso');
       if (anel) tl.to(anel, { strokeDashoffset: 100 - alvo, duration: 1.8, ease: 'power3.out' }, 0.1);
-      // já passou da tela quando o motion carregou (a pessoa rolou antes): mostra direto no estado final
-      if (bloco.getBoundingClientRect().bottom < 0) tl.progress(1);
-      else ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
+      pendentesNumeros.push({ bloco, tl });
     });
 
     /* 2. o trajeto da carga */
@@ -236,6 +235,13 @@
       onUpdate: s => desenhaCaminhao(s.scroll()), onRefresh: s => desenhaCaminhao(s.scroll()),
     });
   }
+
+  // números: o gatilho só é criado depois do pin do trajeto, senão a posição deles não conta o espaço do pin
+  // e a animação dispara cedo demais (no desktop, com a tela ainda longe dos números)
+  pendentesNumeros.forEach(({ bloco, tl }) => {
+    if (bloco.getBoundingClientRect().bottom < 0) tl.progress(1);
+    else ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
+  });
 
   // chegada com âncora (ex.: vindo de uma página interna para ./#frota): recalcula com o pin já aplicado.
   // Este arquivo já roda depois do load, então faz isso direto.
