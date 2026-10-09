@@ -542,6 +542,74 @@ body{background:
 .hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
 .hero>img{opacity:.38}
 .hero::after{background:linear-gradient(90deg,rgba(23,32,46,.35) 0%,rgba(23,32,46,.1) 60%,rgba(23,32,46,0) 100%)!important}
+/* ===== Layout centrado no modelo de referência (cartões escuros, pílulas, brilho discreto no topo) ===== */
+body{background:#17202e!important;background-attachment:scroll!important}
+.hero{background:radial-gradient(ellipse 55% 70% at 50% 0%,rgba(8,33,143,.9) 30%,rgba(41,138,203,.28) 100%)!important}
+.hero::after{background:linear-gradient(180deg,rgba(23,32,46,.15) 0%,rgba(23,32,46,.35) 55%,#17202e 100%)!important}
+.hero>img{opacity:.14!important}
+.hero .wrap.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:0;padding:112px 24px 56px;gap:0}
+.hero-txt{padding:0;max-width:880px}
+.hero-txt .rotulo{justify-content:center}
+.hero h1{font-size:clamp(2.6rem,6.2vw,84px);line-height:1.08;margin:22px 0 20px}
+.hero-txt p{margin:0 auto;max-width:620px}
+.hero-txt .hero-acoes{justify-content:center}
+.hcards{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:940px;width:100%;margin:52px auto 0;padding:0}
+.hcard{background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.hcard h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.hcard span{color:#cdd0d6;font-size:14px}
+.hcard b{font-size:36px;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1}
+.hcard .chip{align-self:flex-start;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.02em;text-transform:none;background:#17202e;color:#6ae4ff;border:1px solid #000;border-radius:80px;padding:6px 12px}
+.hero .cotar{max-width:760px;width:100%;margin:44px auto 0}
+.hero .garantias{display:none}
+/* seções centralizadas */
+.sec-head{flex-direction:column;align-items:center;text-align:center;gap:14px}
+.sec-head .lead,.sec-head p{margin-left:auto;margin-right:auto}
+.rotulo{justify-content:center}
+.sec h2{text-align:center}
+.trajeto-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.trajeto-head .lead{margin:0 auto}
+/* abas em pílula que filtram os serviços */
+.stab{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:34px}
+.stab button{font:600 15px/1 "Open Sans",sans-serif;color:#cdd0d6;background:transparent;border:0;border-radius:80px;padding:12px 20px;cursor:pointer}
+.stab button[aria-selected=true]{background:#ffffff;color:#000000}
+.stab button:focus-visible{outline:2px solid #6ae4ff;outline-offset:2px}
+.lista-serv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:36px 0 0;border:0;padding:0}
+.lista-serv li{display:flex;flex-direction:column;gap:10px;background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;grid-template-columns:none;align-items:stretch}
+.lista-serv li[hidden]{display:none}
+.lista-serv h3{font-size:20px;font-weight:600}
+.lista-serv .tag{text-align:left;margin-top:auto;color:#6ae4ff}
+.serv-rodape{text-align:center}
+/* cobertura: dois cartões de mesma altura */
+.cob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.cob-txt,.prazos{background:#202a3e!important;border:1px solid #000!important;border-radius:15px;padding:36px!important}
+.cob-txt h2{font-size:clamp(1.8rem,3vw,40px);text-align:left}
+.cob-txt .rotulo{justify-content:flex-start}
+.cob-txt .lead{text-align:left}
+.cidades{justify-content:flex-start}
+.prazos dl>div{padding:16px 0}
+.prazos h3{text-align:left}
+/* frota centralizada */
+.frota-topo{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.frota-topo>div:first-child{display:flex;flex-direction:column;align-items:center}
+.composicao{max-width:760px;width:100%;margin:28px auto 0}
+.numeros{max-width:760px;width:100%;margin:40px auto 0}
+.numeros div{text-align:center}
+.numeros div+div{border-left:1px solid #000}
+.video-frota{max-width:340px;width:100%;margin:0 auto}
+.frota-faixa{margin-top:60px}
+/* cartões de segurança e passos */
+.passos,.docs{max-width:1100px;margin-left:auto;margin-right:auto}
+.docs-painel{text-align:center;display:flex;flex-direction:column;gap:28px}
+.docs-painel .docs{text-align:left}
+/* fundo em blocos sem sombra */
+.chamada{text-align:center}
+.chamada .wrap{display:flex;flex-direction:column;align-items:center}
+.chamada p{margin-left:auto;margin-right:auto}
+.chamada h2{margin-left:auto;margin-right:auto}
+@media (max-width:1000px){
+  .hcards,.lista-serv,.cob-grid{grid-template-columns:1fr}
+  .numeros{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -598,7 +666,12 @@ body{background:
       <p>11 caminhões próprios, seguro até o valor da nota fiscal e rastreio por satélite em todas as viagens. Pedido confirmado até as 11h é entregue no mesmo dia na Grande São Paulo.</p>
     </div>
 
-    <div class="cotar" id="cotar">
+    <ul class="hcards" aria-label="Destaques da ZUPO">
+        <li class="hcard"><h3>Seguro</h3><span>RCTR-C e RC-DC em toda viagem</span><b>Até a NF</b><span class="chip">Valor da nota fiscal</span></li>
+        <li class="hcard"><h3>Rastreio</h3><span>Rastreador por satélite</span><b>24 h</b><span class="chip">Bloqueio remoto</span></li>
+        <li class="hcard"><h3>Frota própria</h3><span>Caminhões e motoristas da casa</span><b>11</b><span class="chip">Cotia, SP</span></li>
+      </ul>
+      <div class="cotar" id="cotar">
       <div class="abas" role="tablist" aria-label="Cotação ou rastreio">
         <button type="button" role="tab" id="aba-cotar" aria-selected="true" aria-controls="p-cotar"><svg aria-hidden="true"><use href="#i-caixa"/></svg>Cotar frete</button>
         <button type="button" role="tab" id="aba-rastrear" aria-selected="false" aria-controls="p-rastrear" tabindex="-1"><svg aria-hidden="true"><use href="#i-busca"/></svg>Rastrear carga</button>
@@ -688,12 +761,19 @@ body{background:
   <div class="wrap">
     <span class="rotulo">Serviços</span>
     <h2 id="h-serv">Da caixa avulsa à <em>carga fechada</em></h2>
+    <div class="stab" role="tablist" aria-label="Filtrar serviços">
+      <button type="button" role="tab" aria-selected="true" data-filtro="todos">Todos</button>
+      <button type="button" role="tab" aria-selected="false" data-filtro="fracionada">Fracionada</button>
+      <button type="button" role="tab" aria-selected="false" data-filtro="lotacao">Lotação</button>
+      <button type="button" role="tab" aria-selected="false" data-filtro="vuc">Centro (VUC)</button>
+      <button type="button" role="tab" aria-selected="false" data-filtro="contrato">Contrato</button>
+    </div>
     <ul class="lista-serv">
-      <li><h3><a href="carga-fracionada.html">Carga fracionada</a></h3><p>Sua carga divide o caminhão com a de outros clientes que vão para a mesma região, e você paga pelo espaço que ocupa.</p><span class="tag">1 caixa a 10 paletes</span></li>
-      <li><h3><a href="lotacao.html">Lotação</a></h3><p>O caminhão inteiro é seu. Ele sai da sua doca direto para o destino, sem passar por outro depósito.</p><span class="tag">Baú ou graneleiro até 14 t</span></li>
-      <li><h3><a href="entrega-vuc-centro-sp.html">Entrega no centro com VUC</a></h3><p>O VUC pode circular na Zona de Máxima Restrição de Circulação de São Paulo, onde caminhão comum tem horário restrito.</p><span class="tag">2 VUCs na frota</span></li>
-      <li><h3>Transporte dedicado</h3><p>Um caminhão e um motorista fixos para a sua operação, com rota e horários fechados por contrato mensal.</p><span class="tag">Contrato mensal</span></li>
-      <li><h3>Coleta programada</h3><p>O caminhão passa na sua empresa nos dias e no horário combinados e leva o que estiver separado.</p><span class="tag">Dias e horário fixos</span></li>
+      <li data-cat="fracionada"><h3><a href="carga-fracionada.html">Carga fracionada</a></h3><p>Sua carga divide o caminhão com a de outros clientes que vão para a mesma região, e você paga pelo espaço que ocupa.</p><span class="tag">1 caixa a 10 paletes</span></li>
+      <li data-cat="lotacao"><h3><a href="lotacao.html">Lotação</a></h3><p>O caminhão inteiro é seu. Ele sai da sua doca direto para o destino, sem passar por outro depósito.</p><span class="tag">Baú ou graneleiro até 14 t</span></li>
+      <li data-cat="vuc"><h3><a href="entrega-vuc-centro-sp.html">Entrega no centro com VUC</a></h3><p>O VUC pode circular na Zona de Máxima Restrição de Circulação de São Paulo, onde caminhão comum tem horário restrito.</p><span class="tag">2 VUCs na frota</span></li>
+      <li data-cat="contrato"><h3>Transporte dedicado</h3><p>Um caminhão e um motorista fixos para a sua operação, com rota e horários fechados por contrato mensal.</p><span class="tag">Contrato mensal</span></li>
+      <li data-cat="contrato"><h3>Coleta programada</h3><p>O caminhão passa na sua empresa nos dias e no horário combinados e leva o que estiver separado.</p><span class="tag">Dias e horário fixos</span></li>
     </ul>
     <p class="serv-rodape">Não sabe qual serviço usar? <a href="https://wa.me/5511995854072?text=Ol%C3%A1!%20N%C3%A3o%20sei%20qual%20servi%C3%A7o%20preciso%2C%20pode%20me%20ajudar%3F" target="_blank" rel="noopener">Conte o que precisa transportar no WhatsApp</a> e a gente indica o caminhão.</p>
   </div>
@@ -1006,6 +1086,17 @@ addEventListener('load', () => {
   ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(ev => addEventListener(ev, carregar, { once: true, passive: true }));
   setTimeout(carregar, 3000);
 }, { once: true });
+</script>
+<script>
+(() => {
+  const botoes = [...document.querySelectorAll('.stab [data-filtro]')];
+  const itens = [...document.querySelectorAll('.lista-serv li[data-cat]')];
+  botoes.forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.filtro;
+    botoes.forEach(x => x.setAttribute('aria-selected', x === b));
+    itens.forEach(li => { li.hidden = !(f === 'todos' || li.dataset.cat === f); });
+  }));
+})();
 </script>
 </body>
 </html>

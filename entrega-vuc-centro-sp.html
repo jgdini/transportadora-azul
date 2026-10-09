@@ -514,6 +514,74 @@ body{background:
 .hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
 .hero>img{opacity:.38}
 .hero::after{background:linear-gradient(90deg,rgba(23,32,46,.35) 0%,rgba(23,32,46,.1) 60%,rgba(23,32,46,0) 100%)!important}
+/* ===== Layout centrado no modelo de referência (cartões escuros, pílulas, brilho discreto no topo) ===== */
+body{background:#17202e!important;background-attachment:scroll!important}
+.hero{background:radial-gradient(ellipse 55% 70% at 50% 0%,rgba(8,33,143,.9) 30%,rgba(41,138,203,.28) 100%)!important}
+.hero::after{background:linear-gradient(180deg,rgba(23,32,46,.15) 0%,rgba(23,32,46,.35) 55%,#17202e 100%)!important}
+.hero>img{opacity:.14!important}
+.hero .wrap.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:0;padding:112px 24px 56px;gap:0}
+.hero-txt{padding:0;max-width:880px}
+.hero-txt .rotulo{justify-content:center}
+.hero h1{font-size:clamp(2.6rem,6.2vw,84px);line-height:1.08;margin:22px 0 20px}
+.hero-txt p{margin:0 auto;max-width:620px}
+.hero-txt .hero-acoes{justify-content:center}
+.hcards{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:940px;width:100%;margin:52px auto 0;padding:0}
+.hcard{background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.hcard h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.hcard span{color:#cdd0d6;font-size:14px}
+.hcard b{font-size:36px;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1}
+.hcard .chip{align-self:flex-start;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.02em;text-transform:none;background:#17202e;color:#6ae4ff;border:1px solid #000;border-radius:80px;padding:6px 12px}
+.hero .cotar{max-width:760px;width:100%;margin:44px auto 0}
+.hero .garantias{display:none}
+/* seções centralizadas */
+.sec-head{flex-direction:column;align-items:center;text-align:center;gap:14px}
+.sec-head .lead,.sec-head p{margin-left:auto;margin-right:auto}
+.rotulo{justify-content:center}
+.sec h2{text-align:center}
+.trajeto-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.trajeto-head .lead{margin:0 auto}
+/* abas em pílula que filtram os serviços */
+.stab{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:34px}
+.stab button{font:600 15px/1 "Open Sans",sans-serif;color:#cdd0d6;background:transparent;border:0;border-radius:80px;padding:12px 20px;cursor:pointer}
+.stab button[aria-selected=true]{background:#ffffff;color:#000000}
+.stab button:focus-visible{outline:2px solid #6ae4ff;outline-offset:2px}
+.lista-serv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:36px 0 0;border:0;padding:0}
+.lista-serv li{display:flex;flex-direction:column;gap:10px;background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;grid-template-columns:none;align-items:stretch}
+.lista-serv li[hidden]{display:none}
+.lista-serv h3{font-size:20px;font-weight:600}
+.lista-serv .tag{text-align:left;margin-top:auto;color:#6ae4ff}
+.serv-rodape{text-align:center}
+/* cobertura: dois cartões de mesma altura */
+.cob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.cob-txt,.prazos{background:#202a3e!important;border:1px solid #000!important;border-radius:15px;padding:36px!important}
+.cob-txt h2{font-size:clamp(1.8rem,3vw,40px);text-align:left}
+.cob-txt .rotulo{justify-content:flex-start}
+.cob-txt .lead{text-align:left}
+.cidades{justify-content:flex-start}
+.prazos dl>div{padding:16px 0}
+.prazos h3{text-align:left}
+/* frota centralizada */
+.frota-topo{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.frota-topo>div:first-child{display:flex;flex-direction:column;align-items:center}
+.composicao{max-width:760px;width:100%;margin:28px auto 0}
+.numeros{max-width:760px;width:100%;margin:40px auto 0}
+.numeros div{text-align:center}
+.numeros div+div{border-left:1px solid #000}
+.video-frota{max-width:340px;width:100%;margin:0 auto}
+.frota-faixa{margin-top:60px}
+/* cartões de segurança e passos */
+.passos,.docs{max-width:1100px;margin-left:auto;margin-right:auto}
+.docs-painel{text-align:center;display:flex;flex-direction:column;gap:28px}
+.docs-painel .docs{text-align:left}
+/* fundo em blocos sem sombra */
+.chamada{text-align:center}
+.chamada .wrap{display:flex;flex-direction:column;align-items:center}
+.chamada p{margin-left:auto;margin-right:auto}
+.chamada h2{margin-left:auto;margin-right:auto}
+@media (max-width:1000px){
+  .hcards,.lista-serv,.cob-grid{grid-template-columns:1fr}
+  .numeros{grid-template-columns:1fr}
+}
 </style>
 <style>
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}
