@@ -534,6 +534,14 @@ body{background:
   radial-gradient(ellipse 60% 40% at 20% 100%,rgba(8,33,143,.45) 0%,rgba(23,32,46,0) 70%),
   #17202e!important;background-attachment:fixed}
 .escuro,.claro,.branco,.sec,.rota,.chamada,.rodape{background:transparent!important}
+/* Horizon Glow (refero / DESIGN.md): o gradiente exato do sistema, aplicado de verdade */
+:root{--gradient-horizon-glow:radial-gradient(circle, rgb(8, 33, 143) 40%, rgb(41, 138, 203) 100%)}
+body{background:
+  radial-gradient(circle at 0% 0%,rgb(8,33,143) 0%,rgb(41,138,203) 90%) fixed no-repeat,
+  #17202e!important}
+.hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
+.hero>img{opacity:.38}
+.hero::after{background:linear-gradient(90deg,rgba(23,32,46,.35) 0%,rgba(23,32,46,.1) 60%,rgba(23,32,46,0) 100%)!important}
 </style>
 </head>
 <body>
