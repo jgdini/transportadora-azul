@@ -55,24 +55,6 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(en => { naTela = en[0].isIntersecting; aplicar(); }).observe(faixa);
   }
 
-  /* ---------- caminhão que desce pela lateral conforme a página rola (só telas grandes) ---------- */
-  const caminhao = q('#caminhao'), cliente = q('#cliente');
-  if (caminhao && cliente && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const rodas = qa('.caminhao .roda');
-    const INICIO = 150; // logo abaixo do cabeçalho fixo
-    const desenha = p => {
-      const fim = innerHeight - 200;
-      caminhao.style.transform = 'translate3d(0, ' + ((fim - INICIO) * p) + 'px, 0)';
-      rodas.forEach(r => { r.style.transform = 'rotate(' + (p * 1500) + 'deg)'; });
-      cliente.style.top = (innerHeight - 130) + 'px';
-      cliente.style.opacity = String(Math.min(1, Math.max(0, (p - 0.86) / 0.1)));
-    };
-    ScrollTrigger.create({
-      trigger: document.documentElement, start: 'top top', end: 'bottom bottom',
-      onUpdate: s => desenha(s.progress), onRefresh: s => desenha(s.progress),
-    });
-  }
-
   /* ---------- itens que entram ao aparecer ---------- */
   // o motion pode chegar depois da primeira rolagem: o que já está na tela (ou acima dela) não é escondido de novo
   const foraDaTela = el => el.getBoundingClientRect().top > innerHeight * 0.92;
@@ -202,6 +184,32 @@
     }
     return () => limpar.forEach(f => f());
   });
+
+  // por último, para os pins de cima já estarem calculados (senão a posição desta seção sai errada)
+  /* ---------- caminhão que anda de lado pela pista conforme a rolagem ---------- */
+  const rota = q('#rota'), rCam = q('#rota-caminhao'), rDoca = q('#rota-doca'), rFaixas = q('#rota-faixas');
+  if (rota && rCam && rDoca && rFaixas && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const rodas = qa('#rota-caminhao .roda');
+    const palco = q('.rota-palco');
+    const desenhaRota = pSecao => {
+      // o caminhão chega à doca em 80% da seção fixa; o resto é a página descendo com ele parado
+      const p = Math.min(1, pSecao / 0.8);
+      const largura = palco.clientWidth, camW = rCam.offsetWidth, docaW = rDoca.offsetWidth;
+      // para com a frente da cabine encostada na porta da doca (a porta fica a ~23% da largura da doca)
+      const parada = largura - docaW + docaW * 0.2 - camW;
+      const x = (parada - 40) * p;
+      rCam.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+      // as rodas giram na proporção do caminho andado (raio de ~5% da largura do caminhão)
+      const giro = (x / (camW * 0.05)) * (180 / Math.PI);
+      rodas.forEach(r => { r.style.transform = 'rotate(' + giro + 'deg)'; });
+      rFaixas.style.transform = 'translate3d(' + (-x * 1.6) + 'px, 0, 0)';
+      rDoca.classList.toggle('chegou', p >= 1);
+    };
+    ScrollTrigger.create({
+      trigger: rota, start: 'top top', end: 'bottom bottom',
+      onUpdate: s => desenhaRota(s.progress), onRefresh: s => desenhaRota(s.progress),
+    });
+  }
 
   // chegada com âncora (ex.: vindo de uma página interna para ./#frota): recalcula com o pin já aplicado.
   // Este arquivo já roda depois do load, então faz isso direto.
