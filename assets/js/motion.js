@@ -42,9 +42,36 @@
   const fmt = n => Math.round(n).toLocaleString('pt-BR');
   const contadores = qa('.count').filter(el => el.getBoundingClientRect().top > innerHeight * 0.92);
 
-  /* ---------- faixa da frota: o loop CSS só roda quando está na tela ---------- */
-  const trilho = q('.frota-trilho');
-  if (trilho) ScrollTrigger.create({ trigger: '.frota-faixa', start: 'top bottom', end: 'bottom top', onToggle: s => trilho.classList.toggle('parado', !s.isActive) });
+  /* ---------- faixa da frota: pausa com o mouse em cima e fora da tela ----------
+     Usa pointerenter/pointerleave (e não :hover, que pode ficar travado depois de uma rolagem)
+     e uma única função decide o estado, para que um evento não desfaça o outro. */
+  const trilho = q('.frota-trilho'), faixa = q('.frota-faixa');
+  if (trilho && faixa) {
+    let sobMouse = false, naTela = true;
+    const aplicar = () => { trilho.style.animationPlayState = (sobMouse || !naTela) ? 'paused' : 'running'; };
+    faixa.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { sobMouse = true; aplicar(); } });
+    faixa.addEventListener('pointerleave', () => { sobMouse = false; aplicar(); });
+    faixa.addEventListener('pointercancel', () => { sobMouse = false; aplicar(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(en => { naTela = en[0].isIntersecting; aplicar(); }).observe(faixa);
+  }
+
+  /* ---------- caminhão que desce pela lateral conforme a página rola (só telas grandes) ---------- */
+  const caminhao = q('#caminhao'), cliente = q('#cliente');
+  if (caminhao && cliente && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const rodas = qa('.caminhao .roda');
+    const INICIO = 150; // logo abaixo do cabeçalho fixo
+    const desenha = p => {
+      const fim = innerHeight - 200;
+      caminhao.style.transform = 'translate3d(0, ' + ((fim - INICIO) * p) + 'px, 0)';
+      rodas.forEach(r => { r.style.transform = 'rotate(' + (p * 1500) + 'deg)'; });
+      cliente.style.top = (innerHeight - 130) + 'px';
+      cliente.style.opacity = String(Math.min(1, Math.max(0, (p - 0.86) / 0.1)));
+    };
+    ScrollTrigger.create({
+      trigger: document.documentElement, start: 'top top', end: 'bottom bottom',
+      onUpdate: s => desenha(s.progress), onRefresh: s => desenha(s.progress),
+    });
+  }
 
   /* ---------- itens que entram ao aparecer ---------- */
   // o motion pode chegar depois da primeira rolagem: o que já está na tela (ou acima dela) não é escondido de novo
