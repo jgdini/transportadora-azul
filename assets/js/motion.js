@@ -60,7 +60,7 @@
   const foraDaTela = el => el.getBoundingClientRect().top > innerHeight * 0.92;
   const revelaveis = qa([
     '.trajeto-head .rotulo', '.trajeto-head .lead', '#servicos .rotulo', '.lista-serv li', '.serv-rodape',
-    '.frota-topo .rotulo', '.frota-topo .lead', '.composicao li', '.numeros > div',
+    '.frota-topo .rotulo', '.frota-topo .lead', '.composicao li',
     '.cob-txt > :not(h2)', '.prazos h3', '.prazos dl > div', '.chamada .wrap > :not(h2)',
     '#duvidas .faq-grid > div:first-child > :not(h2)', '.faq details', '.texto > *', '.ficha',
   ].join(',')).filter(foraDaTela);
@@ -102,14 +102,22 @@
       onEnterBack: b => gsap.to(b, { opacity: 1, y: 0, duration: 0.5, overwrite: true }),
     });
 
-    /* contadores: sobem de 0 até o valor quando o número aparece */
+    /* números (98%, 1.900, 18): o bloco sobe, o número conta até o valor e uma barra azul cresce embaixo */
     contadores.forEach(el => {
       const alvo = parseInt(el.dataset.target, 10) || 0, obj = { v: 0 };
+      const bloco = el.closest('.numeros > div') || el.parentElement;
+      const barra = document.createElement('span');
+      barra.className = 'barra-num';
+      barra.setAttribute('aria-hidden', 'true');
+      bloco.appendChild(barra);
       el.textContent = '0';
-      ScrollTrigger.create({
-        trigger: el, start: 'top 90%', once: true,
-        onEnter: () => gsap.to(obj, { v: alvo, duration: 1.4, ease: 'power2.out', onUpdate: () => { el.textContent = fmt(obj.v); } }),
-      });
+      gsap.set(bloco, { opacity: 0, y: 40 });
+      gsap.set(barra, { scaleX: 0 });
+      const tl = gsap.timeline({ paused: true });
+      tl.to(bloco, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+        .to(obj, { v: alvo, duration: 2, ease: 'power3.out', onUpdate: () => { el.textContent = fmt(obj.v); } }, 0.1)
+        .to(barra, { scaleX: 1, duration: 0.9, ease: 'expo.out' }, 0.3);
+      ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
     });
 
     /* 2. o trajeto da carga */

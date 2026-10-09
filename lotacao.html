@@ -599,6 +599,12 @@ a:hover{text-decoration:underline}
 /* foto do topo sem sobreposição escura: o tema claro não usa véu sobre imagens do topo */
 .hero::after,.hero::before{display:none!important;background:none!important}
 .hero>img{opacity:1!important;filter:none!important}
+/* números grandes que aparecem com o scroll (assets/js/motion.js) */
+.numeros > div{position:relative;padding:40px 24px 44px}
+.numeros b{font-size:clamp(64px,8vw,108px);font-weight:600;letter-spacing:-.04em;line-height:1}
+.numeros div>span:not(.barra-num){font-size:17px;letter-spacing:-.374px}
+.barra-num{position:absolute;left:50%;bottom:20px;width:56px;height:3px;margin-left:-28px;border-radius:3px;background:#0071e3;transform-origin:center}
+.numeros b .count{display:inline;margin:0;font-size:inherit;color:inherit;letter-spacing:inherit;line-height:inherit}
 </style>
 <style>
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}
