@@ -39,7 +39,7 @@
   });
 
   /* ---------- contadores (98%, 1.900, 18) ---------- */
-  const contadores = qa('.count').filter(el => el.getBoundingClientRect().top > innerHeight * 0.92);
+  const contadores = qa('.count');
 
   /* ---------- faixa da frota: pausa com o mouse em cima e fora da tela ----------
      Usa pointerenter/pointerleave (e não :hover, que pode ficar travado depois de uma rolagem)
@@ -115,7 +115,9 @@
       tl.to(b, { yPercent: 0, duration: 1, ease: 'expo.out' });
       const anel = bloco.querySelector('.progresso');
       if (anel) tl.to(anel, { strokeDashoffset: 100 - alvo, duration: 1.8, ease: 'power3.out' }, 0.1);
-      ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
+      // já passou da tela quando o motion carregou (a pessoa rolou antes): mostra direto no estado final
+      if (bloco.getBoundingClientRect().bottom < 0) tl.progress(1);
+      else ScrollTrigger.create({ trigger: bloco, start: 'top 82%', once: true, onEnter: () => tl.play() });
     });
 
     /* 2. o trajeto da carga */
