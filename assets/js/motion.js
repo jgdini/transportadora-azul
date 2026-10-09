@@ -187,9 +187,9 @@
 
   // por último, para os pins de cima já estarem calculados (senão a posição desta seção sai errada)
   /* ---------- caminhão que percorre a página e entra na doca do cliente (só telas largas) ---------- */
-  const janela = q('#caminhao-janela'), camImg = q('#caminhao-img'), dock = q('#doca-fim'), pista = q('#faixa-pista'), linha = q('#faixa-linha');
+  const janela = q('#caminhao-janela'), camImg = q('#caminhao-img'), dock = q('#doca-fim');
   const hero = q('.hero');
-  if (janela && camImg && dock && pista && linha && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (janela && camImg && dock && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const desenhaCaminhao = sy => {
       const max = document.documentElement.scrollHeight - innerHeight;
       const heroFim = hero.getBoundingClientRect().bottom + sy;      // o caminhão só começa depois do topo
@@ -200,11 +200,9 @@
       // no fim da página a cabine chega à porta da doca; a parte que passa da linha da doca fica escondida
       const fim = innerHeight - dockH - camH * 0.2;
       const y = inicio + (fim - inicio) * p;
-      camImg.style.transform = 'translate3d(-50%, ' + y + 'px, 0)';
+      camImg.style.transform = 'translate3d(0, ' + y + 'px, 0)';
       janela.style.clipPath = 'inset(0 0 ' + Math.max(0, innerHeight - dockTop) + 'px 0)';
       janela.style.opacity = String(visivel);
-      pista.style.opacity = String(visivel);
-      linha.style.transform = 'translate3d(0, ' + (-(sy % 100)) + 'px, 0)';
       dock.classList.toggle('chegou', p >= 0.98);
     };
     ScrollTrigger.create({
