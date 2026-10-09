@@ -361,6 +361,14 @@ html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
 @media (min-width:1400px){.caminhao-janela{display:block}.doca-fim .porta{display:block}}
 @media (prefers-reduced-motion:reduce){.caminhao-janela{display:none!important}}
 
+/* trajeto: texto mais perto da margem onde está o caminhão, para não sobrar espaço vazio */
+@media (min-width:1400px){
+  #trajeto .wrap{max-width:none;padding-left:calc(var(--gutter) + 6px);padding-right:clamp(24px,6vw,110px)}
+}
+/* caminhão pequeno que anda sobre a estrada, acompanhando a revelação (assets/js/motion.js) */
+.estrada-cam{position:absolute;left:0;top:0;width:64px;height:34px;opacity:0;pointer-events:none;will-change:transform}
+.estrada-cam svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+@media (max-width:1000px){.estrada-cam{display:none}}
 /* responsivo */
 @media (max-width:1000px){
   .sec{padding:80px 0}
@@ -524,6 +532,16 @@ html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
         <path class="faixa" d="M25 62 C 300 62, 420 38, 600 38 S 900 14, 1175 14"/>
         <path class="fio" d="M25 32 C 300 32, 420 8, 600 8 S 900 -16, 1175 -16"/>
       </svg>
+      <div class="estrada-cam" id="estrada-cam" aria-hidden="true">
+        <svg viewBox="0 0 64 34" focusable="false">
+          <rect x="1" y="6" width="40" height="20" rx="2.5" fill="#eceef1" stroke="#aeb5c0" stroke-width="1"/>
+          <rect x="1" y="20" width="40" height="3" fill="#c9a44e"/>
+          <path d="M42 11H52Q56 11 58 15L62 21V26H42Z" fill="#1d1e22"/>
+          <path d="M46 14H51Q54 14 55 16L57 19H46Z" fill="#5b6372"/>
+          <rect x="4" y="26" width="54" height="3" rx="1" fill="#2a2b30"/>
+          <circle cx="12" cy="28" r="4" fill="#111"/><circle cx="36" cy="28" r="4" fill="#111"/><circle cx="54" cy="28" r="4" fill="#111"/>
+        </svg>
+      </div>
       <ol class="paradas">
         <li class="parada"><span class="marco">1</span><h3>Cotação</h3><p>Você manda origem, destino, peso e volumes pelo WhatsApp e recebe o valor em até 30 minutos.</p></li>
         <li class="parada"><span class="marco">2</span><h3>Coleta</h3><p>Pedido confirmado até as 11h é coletado no mesmo dia. O motorista confere os volumes com a nota e fotografa a carga arrumada no baú.</p><small>Conferência e foto</small></li>

@@ -130,6 +130,18 @@
             : { trigger: '#estrada', start: 'top 80%', end: 'bottom 45%', scrub: 0.6 },
         });
         tl.to(pista, { clipPath: 'inset(-40% 0% -40% 0%)', ease: 'none', duration: 1 }, 0);
+        // o caminhão anda sobre a estrada, seguindo a ponta da revelação (coordenadas do SVG: 1200x90)
+        const camEl = q('#estrada-cam'), estradaEl = q('#estrada');
+        if (camEl && estradaEl) {
+          const posicao = { t: 0 };
+          const pontoNaEstrada = t => {
+            const x = 25 + 1150 * t, y = 62 - 48 * t; // a linha da estrada vai de (25, 62) a (1175, 14)
+            const px = x / 1200 * estradaEl.offsetWidth;
+            camEl.style.transform = 'translate3d(' + (px - 32) + 'px, ' + (y - 24) + 'px, 0)';
+            camEl.style.opacity = String(Math.min(1, t * 12));
+          };
+          tl.to(posicao, { t: 1, ease: 'none', duration: 1, onUpdate: () => pontoNaEstrada(posicao.t) }, 0);
+        }
         paradas.forEach((p, i) => {
           const t = 0.1 + i * 0.25; // cada marco fica no centro da sua coluna (12,5%, 37,5%...)
           tl.to(p, { opacity: 1, duration: 0.14, ease: 'none' }, t)
