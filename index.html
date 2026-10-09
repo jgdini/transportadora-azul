@@ -354,10 +354,10 @@ p{margin:0}
 
 /* caminhão que percorre a página na faixa da esquerda até a doca (assets/js/motion.js). Só em telas largas, onde há margem à esquerda */
 html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
-.faixa-pista{position:fixed;top:0;bottom:0;left:0;width:var(--gutter);z-index:44;background:#1d1e22;border-right:2px solid var(--ouro);display:none;pointer-events:none;overflow:hidden}
+.faixa-pista{position:fixed;top:0;bottom:0;left:0;width:var(--gutter);z-index:44;background:#2c2d33;border-right:2px solid var(--ouro);display:none;pointer-events:none;overflow:hidden}
 .faixa-linha{position:absolute;top:-120px;bottom:-120px;left:50%;width:3px;margin-left:-1.5px;background:repeating-linear-gradient(180deg,#f3f3f3 0 50px,transparent 50px 100px)}
 .caminhao-janela{position:fixed;top:0;left:0;width:var(--gutter);height:100vh;z-index:55;overflow:hidden;pointer-events:none;display:none;opacity:0}
-.caminhao-janela img{position:absolute;top:0;left:50%;width:calc(var(--gutter) - 14px);height:auto;display:block;will-change:transform;filter:drop-shadow(0 10px 14px rgba(0,0,0,.45))}
+.caminhao-janela img{position:absolute;top:0;left:50%;width:min(60px,calc(var(--gutter) - 28px));height:auto;display:block;will-change:transform;filter:brightness(1.7) drop-shadow(0 0 1px rgba(236,238,241,.8)) drop-shadow(0 10px 14px rgba(0,0,0,.5))}
 .doca-fim{position:relative;height:clamp(220px,30vh,320px);background:linear-gradient(180deg,#2a2b30 0%,#131418 100%);border-top:3px solid var(--ouro);overflow:hidden;color:#fff;transition:box-shadow .5s}
 .doca-fim .porta{position:absolute;top:0;bottom:0;left:0;width:var(--gutter);background:repeating-linear-gradient(180deg,#0b0b0c 0 14px,#2a2b30 14px 17px);display:none}
 .doca-fim .wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center}
