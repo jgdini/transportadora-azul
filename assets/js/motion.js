@@ -186,28 +186,30 @@
   });
 
   // por último, para os pins de cima já estarem calculados (senão a posição desta seção sai errada)
-  /* ---------- caminhão que desce pela lateral e some na doca no fim da página ---------- */
-  const rota = q('#rota'), rCam = q('#rota-caminhao'), rDoca = q('#rota-doca'), rLinha = q('#rota-linha');
-  if (rota && rCam && rDoca && rLinha && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const palco = q('.rota-palco');
-    const desenhaRota = p => {
-      const altura = palco.clientHeight, camH = rCam.offsetHeight, docaH = rDoca.offsetHeight;
+  /* ---------- caminhão que percorre a página e entra na doca do cliente (só telas largas) ---------- */
+  const janela = q('#caminhao-janela'), camImg = q('#caminhao-img'), dock = q('#doca-fim'), pista = q('#faixa-pista'), linha = q('#faixa-linha');
+  const hero = q('.hero');
+  if (janela && camImg && dock && pista && linha && hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const desenhaCaminhao = sy => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const heroFim = hero.getBoundingClientRect().bottom + sy;      // o caminhão só começa depois do topo
+      const p = Math.min(1, Math.max(0, (sy - heroFim) / Math.max(1, max - heroFim)));
+      const visivel = Math.min(1, Math.max(0, (sy - heroFim) / 160));
+      const camH = camImg.offsetHeight, dockH = dock.offsetHeight, dockTop = dock.getBoundingClientRect().top;
       const inicio = 150; // logo abaixo do cabeçalho fixo
-      // o caminhão para com metade da carroceria já dentro da doca: a doca cobre o resto
-      const fim = altura - docaH + camH * 0.5;
+      // no fim da página a cabine chega à porta da doca; a parte que passa da linha da doca fica escondida
+      const fim = innerHeight - dockH - camH * 0.2;
       const y = inicio + (fim - inicio) * p;
-      rCam.style.transform = 'translate3d(0, ' + y + 'px, 0)';
-      // some aos poucos conforme entra: a partir de 75% do caminho fica um pouco menor e mais transparente
-      const entrada = Math.max(0, (p - 0.75) / 0.25);
-      rCam.style.opacity = String(1 - entrada * 0.5);
-      rCam.style.scale = String(1 - entrada * 0.08);
-      // as faixas da pista andam para cima, na direção contrária ao caminhão
-      rLinha.style.transform = 'translate3d(0, ' + (-y * 1.3) + 'px, 0)';
-      rDoca.classList.toggle('chegou', p >= 0.98);
+      camImg.style.transform = 'translate3d(-50%, ' + y + 'px, 0)';
+      janela.style.clipPath = 'inset(0 0 ' + Math.max(0, innerHeight - dockTop) + 'px 0)';
+      janela.style.opacity = String(visivel);
+      pista.style.opacity = String(visivel);
+      linha.style.transform = 'translate3d(0, ' + (-(sy % 100)) + 'px, 0)';
+      dock.classList.toggle('chegou', p >= 0.98);
     };
     ScrollTrigger.create({
-      trigger: rota, start: 'top top', end: 'bottom bottom',
-      onUpdate: s => desenhaRota(s.progress), onRefresh: s => desenhaRota(s.progress),
+      trigger: document.documentElement, start: 'top top', end: 'bottom bottom',
+      onUpdate: s => desenhaCaminhao(s.scroll()), onRefresh: s => desenhaCaminhao(s.scroll()),
     });
   }
 

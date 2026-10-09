@@ -352,34 +352,20 @@ p{margin:0}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
 }
 
-/* caminhão que desce pela lateral e entra na doca (assets/js/motion.js) */
-.rota{position:relative;height:240vh;--faixa:clamp(84px,9vw,128px)}
-.rota-palco{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--concreto)}
-.rota-texto{position:absolute;top:clamp(120px,18vh,180px);left:calc(max(24px,calc(50% - 600px)) + var(--faixa) + 48px);right:24px;z-index:2;max-width:620px}
-.rota-texto h2{font-size:clamp(2rem,3.9vw,3.2rem);margin-top:16px}
-.rota-texto em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ouro-texto)}
-.rota-texto p{margin-top:18px;color:var(--cinza);max-width:46ch}
-.rota-faixa{position:absolute;top:0;bottom:0;left:max(24px,calc(50% - 600px));width:var(--faixa);background:#1d1e22;border-left:2px solid var(--ouro);border-right:2px solid var(--ouro);z-index:1}
-.rota-linha{position:absolute;top:-300px;bottom:-300px;left:50%;width:4px;margin-left:-2px;background:repeating-linear-gradient(180deg,#f3f3f3 0 60px,transparent 60px 120px)}
-.rota-caminhao{position:absolute;top:0;left:max(24px,calc(50% - 600px));width:var(--faixa);z-index:3;will-change:transform,opacity}
-.rota-caminhao svg{width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 12px 16px rgba(0,0,0,.45))}
-.rota-doca{position:absolute;left:0;right:0;bottom:0;height:clamp(200px,30vh,300px);z-index:4;background:linear-gradient(180deg,#2a2b30 0%,#131418 100%);border-top:3px solid var(--ouro);transition:box-shadow .4s}
-.rota-doca .porta{position:absolute;top:0;bottom:0;left:max(24px,calc(50% - 600px));width:var(--faixa);background:repeating-linear-gradient(180deg,#0b0b0c 0 14px,#2a2b30 14px 17px)}
-.rota-doca .letreiro{position:absolute;top:22px;left:max(24px,calc(50% - 600px) + var(--faixa) + 24px);right:24px;font-size:.74rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--ouro-claro)}
-.rota-doca.chegou{box-shadow:0 -8px 40px -10px rgba(201,164,78,.55)}
-@media (prefers-reduced-motion:reduce){
-  .rota{height:auto}
-  .rota-palco{position:relative;height:90vh}
-  .rota-caminhao{top:28vh;transform:none!important}
-}
-@media (max-width:640px){
-  .rota{height:200vh;--faixa:76px}
-  .rota-texto{top:110px;left:calc(12px + var(--faixa) + 16px);right:20px}
-  .rota-faixa{left:12px}
-  .rota-caminhao{left:12px}
-  .rota-doca .porta{left:12px}
-  .rota-doca .letreiro{left:calc(12px + var(--faixa) + 14px);top:18px;font-size:.66rem}
-}
+/* caminhão que percorre a página na faixa da esquerda até a doca (assets/js/motion.js). Só em telas largas, onde há margem à esquerda */
+html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
+.faixa-pista{position:fixed;top:0;bottom:0;left:0;width:var(--gutter);z-index:44;background:#1d1e22;border-right:2px solid var(--ouro);display:none;pointer-events:none;overflow:hidden}
+.faixa-linha{position:absolute;top:-120px;bottom:-120px;left:50%;width:3px;margin-left:-1.5px;background:repeating-linear-gradient(180deg,#f3f3f3 0 50px,transparent 50px 100px)}
+.caminhao-janela{position:fixed;top:0;left:0;width:var(--gutter);height:100vh;z-index:55;overflow:hidden;pointer-events:none;display:none;opacity:0}
+.caminhao-janela img{position:absolute;top:0;left:50%;width:calc(var(--gutter) - 14px);height:auto;display:block;will-change:transform;filter:drop-shadow(0 10px 14px rgba(0,0,0,.45))}
+.doca-fim{position:relative;height:clamp(220px,30vh,320px);background:linear-gradient(180deg,#2a2b30 0%,#131418 100%);border-top:3px solid var(--ouro);overflow:hidden;color:#fff;transition:box-shadow .5s}
+.doca-fim .porta{position:absolute;top:0;bottom:0;left:0;width:var(--gutter);background:repeating-linear-gradient(180deg,#0b0b0c 0 14px,#2a2b30 14px 17px);display:none}
+.doca-fim .wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center}
+.doca-fim .doca-txt{font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,4.6vw,4rem);letter-spacing:-.02em;margin-top:14px}
+.doca-fim .doca-txt em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ouro)}
+.doca-fim.chegou{box-shadow:inset 0 14px 40px -18px rgba(201,164,78,.6)}
+@media (min-width:1400px){.faixa-pista,.caminhao-janela{display:block}.doca-fim .porta{display:block}}
+@media (prefers-reduced-motion:reduce){.faixa-pista,.caminhao-janela{display:none!important}}
 
 /* responsivo */
 @media (max-width:1000px){
@@ -558,34 +544,6 @@ p{margin:0}
   </div>
 </section>
 
-<section class="rota" id="rota" aria-labelledby="h-rota">
-  <div class="rota-palco">
-    <div class="rota-texto">
-      <span class="rotulo">Na estrada</span>
-      <h2 id="h-rota">Do pátio à <em>porta do cliente</em></h2>
-      <p>A carga sai da base em Cotia e segue até a doca do destinatário, com rastreio e seguro em todo o trajeto.</p>
-    </div>
-    <div class="rota-faixa" aria-hidden="true"><div class="rota-linha" id="rota-linha"></div></div>
-    <div class="rota-caminhao" id="rota-caminhao" aria-hidden="true">
-      <svg viewBox="0 0 100 250" focusable="false">
-        <rect x="-3" y="30" width="8" height="26" rx="3" fill="#111"/><rect x="95" y="30" width="8" height="26" rx="3" fill="#111"/>
-        <rect x="-3" y="176" width="8" height="26" rx="3" fill="#111"/><rect x="95" y="176" width="8" height="26" rx="3" fill="#111"/>
-        <rect x="-3" y="200" width="8" height="26" rx="3" fill="#111"/><rect x="95" y="200" width="8" height="26" rx="3" fill="#111"/>
-        <path d="M14 14Q14 4 26 4H74Q86 4 86 14V60Q86 66 80 66H20Q14 66 14 60Z" fill="#1d1e22"/>
-        <rect x="22" y="14" width="56" height="30" rx="6" fill="#5b6372"/>
-        <rect x="6" y="72" width="88" height="170" rx="4" fill="#eceef1" stroke="#aeb5c0" stroke-width="1.5"/>
-        <rect x="6" y="150" width="88" height="5" fill="#c9a44e"/>
-        <text x="50" y="150" transform="rotate(90 50 150)" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="12" letter-spacing="3" fill="#0b0b0c">ZUPO</text>
-        <circle cx="22" cy="10" r="3" fill="#f4e3b0"/><circle cx="78" cy="10" r="3" fill="#f4e3b0"/>
-      </svg>
-    </div>
-    <div class="rota-doca" id="rota-doca" aria-hidden="true">
-      <div class="porta"></div>
-      <div class="letreiro">Doca do cliente</div>
-    </div>
-  </div>
-</section>
-
 <section class="sec branco" id="servicos" aria-labelledby="h-serv">
   <div class="wrap">
     <span class="rotulo">Serviços</span>
@@ -731,7 +689,17 @@ p{margin:0}
     <p class="rodape-pe">© 2026 ZUPO Transportadora. Modelo de site em aprovação.</p>
   </div>
 </footer>
+<div class="doca-fim" id="doca-fim">
+  <div class="porta"></div>
+  <div class="wrap">
+    <span class="rotulo">Chegada</span>
+    <p class="doca-txt">Doca do <em>cliente</em></p>
+  </div>
+</div>
 
+
+<div class="faixa-pista" id="faixa-pista" aria-hidden="true"><div class="faixa-linha" id="faixa-linha"></div></div>
+<div class="caminhao-janela" id="caminhao-janela" aria-hidden="true"><img id="caminhao-img" src="assets/img/caminhao-topo.webp" width="103" height="566" alt="" decoding="async"></div>
 <div class="zap" id="zap">
   <div class="zap-card" id="zap-card" role="dialog" aria-modal="false" aria-labelledby="zap-titulo" hidden>
     <div class="zap-cab">
