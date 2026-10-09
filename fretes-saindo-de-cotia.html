@@ -20,13 +20,11 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/garagem-480.webp 480w, assets/img/garagem-800.webp 800w" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" href="assets/fonts/manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/opensans-var.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html#servico","name":"Fretes saindo de Cotia","description":"Rotas e prazos de frete saindo de Cotia (SP) para a capital, Campinas, Sorocaba, Jundiaí, São José dos Campos, Baixada Santista e estados vizinhos.","url":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html","areaServed":{"@type":"AdministrativeArea","name":"Região Metropolitana de São Paulo"},"provider":{"@id":"https://jgdini.github.io/transportadora-azul/#org"}},{"@type":"WebPage","@id":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html","url":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html","name":"Fretes saindo de Cotia: rotas, distâncias e prazos | ZUPO Transportadora","inLanguage":"pt-BR","isPartOf":{"@id":"https://jgdini.github.io/transportadora-azul/#site"},"about":{"@id":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html#servico"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://jgdini.github.io/transportadora-azul/"},{"@type":"ListItem","position":2,"name":"Fretes saindo de Cotia","item":"https://jgdini.github.io/transportadora-azul/fretes-saindo-de-cotia.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual o prazo de Cotia para Campinas?","acceptedAnswer":{"@type":"Answer","text":"1 dia útil. O caminhão segue pelo Rodoanel e pela Bandeirantes."}},{"@type":"Question","name":"A ZUPO entrega fora do estado de São Paulo?","acceptedAnswer":{"@type":"Answer","text":"Sim, no sul de Minas, no Rio de Janeiro e no Paraná, em 2 a 3 dias, por lotação ou carga fracionada consolidada."}},{"@type":"Question","name":"Vocês coletam em Barueri e Osasco?","acceptedAnswer":{"@type":"Answer","text":"Sim. Barueri, Osasco e as outras cidades da região oeste têm coleta e entrega todo dia útil."}}]},{"@type":["Organization","LocalBusiness"],"@id":"https://jgdini.github.io/transportadora-azul/#org","name":"ZUPO Transportadora","url":"https://jgdini.github.io/transportadora-azul/","telephone":"+55 11 99585-4072","address":{"@type":"PostalAddress","streetAddress":"Rua Saturno, 8 - Jardim Nova Coimbra","addressLocality":"Cotia","addressRegion":"SP","postalCode":"06702-170","addressCountry":"BR"}}]}
 </script>
 <style>
-@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(assets/fonts/manrope-normal.woff2) format("woff2")}
-@font-face{font-family:"Libre Baskerville";font-style:italic;font-weight:400;font-display:optional;src:url(assets/fonts/libre-baskerville-italic.woff2) format("woff2")}
 
 :root{
   --preto:#0b0b0c;      /* fundo do logo */
@@ -221,7 +219,8 @@ p{margin:0}
 .video-frota figcaption{position:absolute;left:18px;bottom:16px;font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ouro-claro);background:rgba(11,11,12,.6);border-radius:999px;padding:7px 14px}
 .frota-faixa{margin-top:72px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 .frota-trilho{display:flex;width:max-content;gap:16px;padding:4px 0;animation:frota-passa 48s linear infinite}
-.frota-faixa:hover .frota-trilho,.frota-faixa:focus-within .frota-trilho,.frota-trilho.parado{animation-play-state:paused}
+.frota-faixa:focus-within .frota-trilho{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.frota-trilho{animation:none}}
 @keyframes frota-passa{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
 .foto-card{flex:none;width:300px;margin:0;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;background:var(--carvao)}
 .foto-card img{aspect-ratio:4/3.3;width:100%;height:auto;object-fit:cover}
@@ -287,10 +286,6 @@ p{margin:0}
 .zap-btn .txt small{display:block;font-weight:600;font-size:.72rem;opacity:.85;margin-top:3px}
 .zap-btn .aviso{position:absolute;top:-4px;right:-2px;min-width:22px;height:22px;border-radius:11px;background:#e5252a;color:#fff;font:700 .78rem/22px var(--sans);text-align:center;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.6,1)}
 .zap-btn.chamando .aviso{transform:scale(1)}
-@media (prefers-reduced-motion:no-preference){
-  .zap-btn::before{content:"";position:absolute;inset:0;border-radius:inherit;border:3px solid var(--zap);animation:onda 2.6s ease-out infinite;pointer-events:none}
-  @keyframes onda{0%{opacity:.8;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.18,1.45)}}
-}
 .zap-card{width:min(340px,calc(100vw - 40px));background:#efeae2;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px -12px rgba(0,0,0,.6);transform-origin:bottom right;color:var(--tinta)}
 .zap-card[hidden]{display:none}
 @media (prefers-reduced-motion:no-preference){.zap-card:not([hidden]){animation:abre .22s ease-out}@keyframes abre{from{opacity:0;transform:translateY(10px) scale(.96)}}}
@@ -321,6 +316,31 @@ p{margin:0}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
 }
 
+/* caminhão que percorre a página na faixa da esquerda até a doca (assets/js/motion.js). Só em telas largas, onde há margem à esquerda */
+html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
+.caminhao-janela{position:fixed;top:0;left:0;width:var(--gutter);height:100vh;z-index:55;overflow:hidden;pointer-events:none;display:none;opacity:0}
+.caminhao-janela img{position:absolute;top:0;left:10px;width:min(60px,calc(var(--gutter) - 20px));height:auto;display:block;will-change:transform;filter:drop-shadow(0 0 1px rgba(236,238,241,.8)) drop-shadow(0 10px 14px rgba(0,0,0,.5))}
+.doca-fim{position:relative;height:clamp(220px,30vh,320px);background:linear-gradient(180deg,#2a2b30 0%,#131418 100%);border-top:3px solid var(--ouro);overflow:hidden;color:#fff;transition:box-shadow .5s}
+.doca-fim .porta{position:absolute;top:0;bottom:0;left:10px;width:min(60px,calc(var(--gutter) - 20px));background:repeating-linear-gradient(180deg,#0b0b0c 0 14px,#2a2b30 14px 17px);display:none}
+.doca-fim .wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center}
+.doca-fim .doca-txt{font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,4.6vw,4rem);letter-spacing:-.02em;margin-top:14px}
+.doca-fim .doca-txt em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--ouro)}
+.doca-fim.chegou{box-shadow:inset 0 14px 40px -18px rgba(201,164,78,.6)}
+@media (min-width:1400px){.caminhao-janela{display:block}.doca-fim .porta{display:block}}
+@media (prefers-reduced-motion:reduce){.caminhao-janela{display:none!important}}
+
+/* trajeto: texto mais perto da margem onde está o caminhão, para não sobrar espaço vazio */
+@media (min-width:1400px){
+  #trajeto .wrap{max-width:none;padding-left:calc(var(--gutter) + 6px);padding-right:clamp(24px,6vw,110px)}
+}
+/* brilho que percorre a linha dourada e pulsação em cada parada (assets/js/motion.js) */
+.estrada .fio-brilho{fill:none;stroke:#fff6d6;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:6 94;stroke-dashoffset:0;filter:drop-shadow(0 0 4px #f4c21b)}
+.parada .marco{position:relative}
+.parada .anel{position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--ouro);opacity:0;pointer-events:none}
+/* caminhão pequeno que anda sobre a estrada, acompanhando a revelação (assets/js/motion.js) */
+.estrada-cam{position:absolute;left:0;top:0;width:64px;height:34px;opacity:0;pointer-events:none;will-change:transform}
+.estrada-cam svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+@media (max-width:1000px){.estrada-cam{display:none}}
 /* responsivo */
 @media (max-width:1000px){
   .sec{padding:80px 0}
@@ -367,6 +387,118 @@ p{margin:0}
   .dupla{grid-template-columns:1fr}
   .dupla .campo:first-child{border-right:0;border-bottom:1px solid var(--linha)}
 }
+/* ===== Tema (DESIGN.md): azul-marinho, ciano como único destaque, Open Sans, pílulas, sem sombras ===== */
+@font-face{font-family:"Open Sans";font-style:normal;font-weight:300 800;font-display:swap;src:url(assets/fonts/opensans-var.woff2) format("woff2")}
+:root{
+  --preto:#17202e;        /* canvas */
+  --carvao:#202a3e;       /* superfície de cartões */
+  --grafite:#202a3e;
+  --asfalto:#202a3e;
+  --neve:#202a3e;
+  --fundo:#202a3e;
+  --concreto:#17202e;
+  --branco:#17202e;
+  --linha:#000000;
+  --borda:#000000;
+  --tinta:#ffffff;        /* texto principal */
+  --claro:#ffffff;
+  --cinza:#cdd0d6;        /* texto secundário */
+  --apagado:#cdd0d6;
+  --prata:#cdd0d6;
+  --ouro:#6ae4ff;         /* ciano: destaque único */
+  --ouro-claro:#6ae4ff;
+  --ouro-texto:#6ae4ff;
+  --escovado:#ffffff;     /* preenchimento de botão principal: branco */
+  --zap:#25d366;
+  --zap-esc:#128c4a;
+  --sans:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --display:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Open Sans",ui-sans-serif,system-ui,sans-serif;
+  --r:15px;
+  --r-p:15px;
+}
+/* nada de sombra, brilho ou desfoque: a profundidade vem da borda preta e do tom mais claro do cartão */
+*,*::before,*::after{box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
+body{background:#17202e;color:#ffffff;font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;letter-spacing:-.01em}
+/* atmosfera: brilho azul vindo de trás, de cima à esquerda */
+.hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
+.hero::after{background:linear-gradient(90deg,rgba(23,32,46,.94) 0%,rgba(23,32,46,.72) 45%,rgba(23,32,46,.35) 100%)!important}
+h1,h2,h3{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;letter-spacing:-.036em}
+h1{font-weight:700}
+h2{font-weight:700;font-size:clamp(2rem,4vw,56px);line-height:1.2}
+h3{font-weight:600}
+.hero h1{font-size:clamp(2.6rem,7vw,100px);line-height:1.05}
+em{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;font-style:normal;font-weight:700;color:#6ae4ff}
+.escuro em,.claro em,.branco em{color:#6ae4ff}
+.rotulo{color:#6ae4ff!important;font-weight:600;letter-spacing:.14em}
+.rotulo::before{background:#6ae4ff}
+p,li,dd,dt,summary,label{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
+.lead,.hero-txt p,.hero-foto p{color:#cdd0d6}
+/* seções: tudo no mesmo canvas escuro, sem blocos claros */
+.escuro,.claro,.branco,.sec,.topo-int,.rota,.chamada,.rodape{background:#17202e!important;color:#ffffff}
+.claro .lead,.branco .lead,.escuro .lead{color:#cdd0d6}
+.bloco,.cob-txt,.seg-txt,.faq,.cotar,.prazos,.docs-painel,.placa,.selo,.servico,.passos li,.garantias li,.legenda,.frota-chips li,.cidades li,.endereco,.zap-card,.foto-card,.b-foto,.b-num{background:#202a3e!important;color:#ffffff;border:1px solid #000000;border-radius:15px}
+.b-num p,.b-foto p,.servico p,.passos p,.docs p,.endereco,.cidades li,.frota-chips li{color:#cdd0d6}
+.b-foto{border:1px solid #000}
+.b-ouro,.b-branco,.servico-cta{background:#202a3e!important;color:#ffffff!important;border:1px solid #000}
+.b-ouro p,.b-branco p{color:#cdd0d6}
+.b-num b,.numeros b,.prazos dd,.prazos dd.hoje{color:#ffffff!important;font-weight:700}
+.prazos dd.hoje{background:transparent!important;border:1px solid #6ae4ff;color:#6ae4ff!important;border-radius:80px;padding:6px 14px}
+.prazos{border:1px solid #000;border-radius:15px}
+.cotar .painel h2,.painel h2{color:#ffffff}
+.campos,.campo input,.campo select,.legenda{background:#17202e!important;color:#ffffff;border-color:#000!important}
+.campo input::placeholder{color:#8a93a3}
+.campo svg,.servico .ico svg,.selo svg{color:#6ae4ff}
+.servico .ico{border:1px solid #6ae4ff!important;color:#6ae4ff}
+.servico .tag,.b-num span,.passos li::before{color:#6ae4ff}
+.servico-cta h3,.servico-cta p{color:#ffffff!important}
+.servico-cta .seta{background:#6ae4ff;color:#17202e}
+.passos li::before{font-family:"Open Sans",sans-serif;font-style:normal;font-weight:700}
+.abas{background:#17202e;border:1px solid #000}
+.abas button{color:#cdd0d6;border-radius:80px}
+.abas button[aria-selected=true]{background:#ffffff;color:#000000;box-shadow:none}
+/* botões: pílula; principal em branco, secundário em contorno ciano */
+.btn{border-radius:80px;font-weight:600;min-height:48px;padding:12px 24px}
+.btn-ouro{background:#ffffff!important;color:#000000!important;border:1px solid #ffffff}
+.btn-ouro:hover{background:#e6f9ff!important;filter:none}
+.btn-linha{background:transparent;color:#6ae4ff;border:1px solid #6ae4ff;border-radius:80px}
+.btn-linha:hover{background:rgba(106,228,255,.08)}
+.btn-zap{background:#25d366;color:#053d1d;border-radius:80px}
+.servico-cta{border-radius:15px}
+.link-zap{color:#6ae4ff}
+/* destaques e linhas do trajeto e da doca */
+.estrada .fio{stroke:#6ae4ff}
+.estrada .fio-brilho{stroke:#e6fbff;filter:none}
+.parada .marco{background:#17202e;border:1px solid #6ae4ff;color:#6ae4ff}
+.parada .anel{border-color:#6ae4ff}
+.parada small{color:#6ae4ff}
+.parada p{color:#cdd0d6}
+.doca-fim{background:#202a3e;border-top:1px solid #6ae4ff}
+.doca-fim .porta{background:repeating-linear-gradient(180deg,#000 0 14px,#17202e 14px 17px)}
+.doca-fim .doca-txt em{color:#6ae4ff}
+.seguro-faixa{background:#202a3e!important;border:1px solid #000;border-left:2px solid #6ae4ff;border-radius:15px}
+.seguro-faixa svg{color:#6ae4ff}
+.topo{background:#17202e!important;border-bottom:none}
+.menu a{color:#ffffff}
+.menu a:hover{background:rgba(106,228,255,.08)}
+.atalhos a{color:#cdd0d6}
+.atalhos svg{color:#6ae4ff}
+.menu-btn{background:#202a3e;border:1px solid #000}
+.zap-card{background:#202a3e;color:#ffffff;border:1px solid #000}
+.balao{background:#17202e;color:#ffffff}
+.frota-faixa .foto-card figcaption b{color:#ffffff}
+.foto-card span{color:#cdd0d6}
+.gigante{-webkit-text-stroke:1px rgba(106,228,255,.25);color:transparent}
+.rodape{border-top:1px solid #000}
+.rodape-pe{border-top:1px solid #000;color:#cdd0d6}
+.rodape a{color:#ffffff}
+.rodape a:hover{color:#6ae4ff}
+.rodape h2{color:#6ae4ff}
+.chip,.cidades li,.frota-chips li{border-radius:80px}
+.topo-int .acoes .btn{margin-right:8px}
+/* logo e ícones */
+.marca-txt{color:#cdd0d6}
 </style>
 <style>
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}

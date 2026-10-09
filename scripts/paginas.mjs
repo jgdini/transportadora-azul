@@ -222,7 +222,7 @@ for (const p of paginas) {
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preload" as="image" type="image/webp" imagesrcset="${srcset}" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" href="assets/fonts/manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/opensans-var.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 ${JSON.stringify(schema)}
 </script>

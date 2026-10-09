@@ -10,9 +10,13 @@ const PISO = 14; // ruído do fundo preto
 for (let i = 0, j = 0; i < data.length; i += 3, j += 4) {
   const r = data[i], g = data[i + 1], b = data[i + 2];
   const a = Math.max(0, Math.min(1, (Math.max(r, g, b) - PISO) / (255 - PISO)));
-  rgba[j] = a ? Math.min(255, r / a) : 0;
-  rgba[j + 1] = a ? Math.min(255, g / a) : 0;
-  rgba[j + 2] = a ? Math.min(255, b / a) : 0;
+  // dourado vira ciano (#6ae4ff) mantendo o brilho; prata e cinza ficam como estão
+  const dourado = r - b > 40 && Math.max(r, g, b) > 80;
+  const lum = 0.3 * r + 0.59 * g + 0.11 * b;
+  const [cr, cg, cb] = dourado ? [lum * 0.416, lum * 0.894, lum * 1.0] : [r, g, b];
+  rgba[j] = a ? Math.min(255, cr / a) : 0;
+  rgba[j + 1] = a ? Math.min(255, cg / a) : 0;
+  rgba[j + 2] = a ? Math.min(255, cb / a) : 0;
   rgba[j + 3] = Math.round(a * 255);
 }
 const base = () => sharp(rgba, { raw: { width: W, height: H, channels: 4 } });
