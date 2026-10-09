@@ -85,11 +85,11 @@
     /* 1. títulos das seções sobem linha por linha atrás de uma máscara (a abertura do topo é CSS) */
     if (SplitText) {
       titulos.forEach(t => {
-        const split = SplitText.create(t, { type: 'lines', mask: 'lines', linesClass: 'titulo-linha' });
-        gsap.set(split.lines, { yPercent: 112 });
+        const split = SplitText.create(t, { type: 'words', mask: 'words', wordsClass: 'palavra-titulo' });
+        gsap.set(split.words, { yPercent: 115 });
         ScrollTrigger.create({
           trigger: t, start: 'top 88%', once: true,
-          onEnter: () => gsap.to(split.lines, { yPercent: 0, duration: 1, ease: 'power4.out', stagger: 0.1, onComplete: () => split.revert() }),
+          onEnter: () => gsap.to(split.words, { yPercent: 0, duration: 0.9, ease: 'power4.out', stagger: 0.05, onComplete: () => split.revert() }),
         });
       });
     }

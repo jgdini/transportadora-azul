@@ -2,6 +2,8 @@
 // o brilho de cada pixel vira transparência, então dourado e prata ficam sobre qualquer fundo escuro.
 import sharp from 'sharp';
 
+const CLARO = process.env.TEMA === 'claro';
+const S = CLARO ? '-claro' : '';
 const SRC = 'Arquivo/Logo ZUPO Transportadora Premium.png';
 const { data, info } = await sharp(SRC).removeAlpha().raw().toBuffer({ resolveWithObject: true });
 const W = info.width, H = info.height;
@@ -10,13 +12,16 @@ const PISO = 14; // ruído do fundo preto
 for (let i = 0, j = 0; i < data.length; i += 3, j += 4) {
   const r = data[i], g = data[i + 1], b = data[i + 2];
   const a = Math.max(0, Math.min(1, (Math.max(r, g, b) - PISO) / (255 - PISO)));
-  // dourado vira ciano (#6ae4ff) mantendo o brilho; prata e cinza ficam como estão
   const dourado = r - b > 40 && Math.max(r, g, b) > 80;
   const lum = 0.3 * r + 0.59 * g + 0.11 * b;
-  const [cr, cg, cb] = dourado ? [lum * 0.416, lum * 0.894, lum * 1.0] : [r, g, b];
-  rgba[j] = a ? Math.min(255, cr / a) : 0;
-  rgba[j + 1] = a ? Math.min(255, cg / a) : 0;
-  rgba[j + 2] = a ? Math.min(255, cb / a) : 0;
+  // escura (padrão): dourado vira ciano #6ae4ff, prata fica igual; clara (TEMA=claro): dourado vira azul #0071e3, prata vira tinta #1d1d1f
+  let cor;
+  if (CLARO) cor = dourado ? [0, 113, 227] : [29, 29, 31];
+  else cor = dourado ? [lum * 0.416, lum * 0.894, lum * 1.0] : [r, g, b];
+  const k = CLARO ? 1 : (a ? 1 / a : 0);
+  rgba[j] = Math.min(255, cor[0] * k);
+  rgba[j + 1] = Math.min(255, cor[1] * k);
+  rgba[j + 2] = Math.min(255, cor[2] * k);
   rgba[j + 3] = Math.round(a * 255);
 }
 const base = () => sharp(rgba, { raw: { width: W, height: H, channels: 4 } });
@@ -53,11 +58,11 @@ const topoNome = Math.round((alt - (170 + 26 + subH)) / 2);
 // o sharp redimensiona antes de compor, então compõe primeiro e redimensiona depois
 await sharp({ create: { width: larg, height: alt, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
   .composite([{ input: z, left: 0, top: 0 }, { input: nomeR, left: zW + gap, top: topoNome }, { input: subR, left: zW + gap, top: topoNome + 170 + 26 }])
-  .png().toBuffer().then(b => sharp(b).resize({ height: 84 }).webp({ quality: 90, alphaQuality: 90 }).toFile('assets/img/zupo-logo.webp'));
+  .png().toBuffer().then(b => sharp(b).resize({ height: 84 }).webp({ quality: 90, alphaQuality: 90 }).toFile(`assets/img/zupo-logo${S}.webp`));
 
 // logo completo (sem o slogan) para o rodapé
 const comp = caixa(178, 754);
-await base().extract(comp).resize({ width: 520 }).webp({ quality: 88, alphaQuality: 90 }).toFile('assets/img/zupo-logo-completo.webp');
+await base().extract(comp).resize({ width: 520 }).webp({ quality: 88, alphaQuality: 90 }).toFile(`assets/img/zupo-logo-completo${S}.webp`);
 
-const m = await sharp('assets/img/zupo-logo.webp').metadata();
-console.log('logo cabeçalho', m.width + 'x' + m.height, '| marca', marca.width + 'x' + marca.height);
+const m = await sharp(`assets/img/zupo-logo${S}.webp`).metadata();
+console.log(CLARO ? 'versão clara' : 'versão escura', 'logo', m.width + 'x' + m.height);

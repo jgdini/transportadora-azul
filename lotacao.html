@@ -387,201 +387,218 @@ html{--gutter:max(0px,calc((100vw - 1240px) / 2))}
   .dupla{grid-template-columns:1fr}
   .dupla .campo:first-child{border-right:0;border-bottom:1px solid var(--linha)}
 }
-/* ===== Tema (DESIGN.md): azul-marinho, ciano como único destaque, Open Sans, pílulas, sem sombras ===== */
-@font-face{font-family:"Open Sans";font-style:normal;font-weight:300 800;font-display:swap;src:url(assets/fonts/opensans-var.woff2) format("woff2")}
+/* ===== Tema claro (DESIGN.md): fundo branco, faixas #f5f5f7, cartões de 28px sem sombra, azul só nos botões e links ===== */
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/fonts/inter-var.woff2) format("woff2")}
 :root{
-  --preto:#17202e;        /* canvas */
-  --carvao:#202a3e;       /* superfície de cartões */
-  --grafite:#202a3e;
-  --asfalto:#202a3e;
-  --neve:#202a3e;
-  --fundo:#202a3e;
-  --concreto:#17202e;
-  --branco:#17202e;
-  --linha:#000000;
-  --borda:#000000;
-  --tinta:#ffffff;        /* texto principal */
-  --claro:#ffffff;
-  --cinza:#cdd0d6;        /* texto secundário */
-  --apagado:#cdd0d6;
-  --prata:#cdd0d6;
-  --ouro:#6ae4ff;         /* ciano: destaque único */
-  --ouro-claro:#6ae4ff;
-  --ouro-texto:#6ae4ff;
-  --escovado:#ffffff;     /* preenchimento de botão principal: branco */
+  --preto:#ffffff;        /* canvas */
+  --concreto:#ffffff;
+  --carvao:#f5f5f7;       /* superfície de cartões sobre branco */
+  --grafite:#f5f5f7;
+  --asfalto:#1d1d1f;
+  --neve:#f5f5f7;
+  --fundo:#f5f5f7;
+  --branco:#ffffff;
+  --linha:#d6d6d6;
+  --borda:#d6d6d6;
+  --tinta:#1d1d1f;        /* texto principal */
+  --claro:#1d1d1f;
+  --cinza:#707070;        /* texto secundário */
+  --apagado:#707070;
+  --prata:#707070;
+  --ouro:#0071e3;         /* azul de conversão */
+  --ouro-claro:#0071e3;
+  --ouro-texto:#0066cc;   /* links */
+  --escovado:#0071e3;
   --zap:#25d366;
   --zap-esc:#128c4a;
-  --sans:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --display:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --serif:"Open Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"Open Sans",ui-sans-serif,system-ui,sans-serif;
-  --r:15px;
-  --r-p:15px;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --display:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --r:28px;
+  --r-p:28px;
 }
-/* nada de sombra, brilho ou desfoque: a profundidade vem da borda preta e do tom mais claro do cartão */
 *,*::before,*::after{box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
-body{background:#17202e;color:#ffffff;font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;letter-spacing:-.01em}
-/* atmosfera: brilho azul vindo de trás, de cima à esquerda */
-.hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
-.hero::after{background:linear-gradient(90deg,rgba(23,32,46,.94) 0%,rgba(23,32,46,.72) 45%,rgba(23,32,46,.35) 100%)!important}
-h1,h2,h3{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;letter-spacing:-.036em}
-h1{font-weight:700}
-h2{font-weight:700;font-size:clamp(2rem,4vw,56px);line-height:1.2}
-h3{font-weight:600}
-.hero h1{font-size:clamp(2.6rem,7vw,100px);line-height:1.05}
-em{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif;font-style:normal;font-weight:700;color:#6ae4ff}
-.escuro em,.claro em,.branco em{color:#6ae4ff}
-.rotulo{color:#6ae4ff!important;font-weight:600;letter-spacing:.14em}
-.rotulo::before{background:#6ae4ff}
-p,li,dd,dt,summary,label{font-family:"Open Sans",ui-sans-serif,system-ui,sans-serif}
-.lead,.hero-txt p,.hero-foto p{color:#cdd0d6}
-/* seções: tudo no mesmo canvas escuro, sem blocos claros */
-.escuro,.claro,.branco,.sec,.topo-int,.rota,.chamada,.rodape{background:#17202e!important;color:#ffffff}
-.claro .lead,.branco .lead,.escuro .lead{color:#cdd0d6}
-.bloco,.cob-txt,.seg-txt,.faq,.cotar,.prazos,.docs-painel,.placa,.selo,.servico,.passos li,.garantias li,.legenda,.frota-chips li,.cidades li,.endereco,.zap-card,.foto-card,.b-foto,.b-num{background:#202a3e!important;color:#ffffff;border:1px solid #000000;border-radius:15px}
-.b-num p,.b-foto p,.servico p,.passos p,.docs p,.endereco,.cidades li,.frota-chips li{color:#cdd0d6}
-.b-foto{border:1px solid #000}
-.b-ouro,.b-branco,.servico-cta{background:#202a3e!important;color:#ffffff!important;border:1px solid #000}
-.b-ouro p,.b-branco p{color:#cdd0d6}
-.b-num b,.numeros b,.prazos dd,.prazos dd.hoje{color:#ffffff!important;font-weight:700}
-.prazos dd.hoje{background:transparent!important;border:1px solid #6ae4ff;color:#6ae4ff!important;border-radius:80px;padding:6px 14px}
-.prazos{border:1px solid #000;border-radius:15px}
-.cotar .painel h2,.painel h2{color:#ffffff}
-.campos,.campo input,.campo select,.legenda{background:#17202e!important;color:#ffffff;border-color:#000!important}
-.campo input::placeholder{color:#8a93a3}
-.campo svg,.servico .ico svg,.selo svg{color:#6ae4ff}
-.servico .ico{border:1px solid #6ae4ff!important;color:#6ae4ff}
-.servico .tag,.b-num span,.passos li::before{color:#6ae4ff}
-.servico-cta h3,.servico-cta p{color:#ffffff!important}
-.servico-cta .seta{background:#6ae4ff;color:#17202e}
-.passos li::before{font-family:"Open Sans",sans-serif;font-style:normal;font-weight:700}
-.abas{background:#17202e;border:1px solid #000}
-.abas button{color:#cdd0d6;border-radius:80px}
-.abas button[aria-selected=true]{background:#ffffff;color:#000000;box-shadow:none}
-/* botões: pílula; principal em branco, secundário em contorno ciano */
-.btn{border-radius:80px;font-weight:600;min-height:48px;padding:12px 24px}
-.btn-ouro{background:#ffffff!important;color:#000000!important;border:1px solid #ffffff}
-.btn-ouro:hover{background:#e6f9ff!important;filter:none}
-.btn-linha{background:transparent;color:#6ae4ff;border:1px solid #6ae4ff;border-radius:80px}
-.btn-linha:hover{background:rgba(106,228,255,.08)}
-.btn-zap{background:#25d366;color:#053d1d;border-radius:80px}
-.servico-cta{border-radius:15px}
-.link-zap{color:#6ae4ff}
-/* destaques e linhas do trajeto e da doca */
-.estrada .fio{stroke:#6ae4ff}
-.estrada .fio-brilho{stroke:#e6fbff;filter:none}
-.parada .marco{background:#17202e;border:1px solid #6ae4ff;color:#6ae4ff}
-.parada .anel{border-color:#6ae4ff}
-.parada small{color:#6ae4ff}
-.parada p{color:#cdd0d6}
-.doca-fim{background:#202a3e;border-top:1px solid #6ae4ff}
-.doca-fim .porta{background:repeating-linear-gradient(180deg,#000 0 14px,#17202e 14px 17px)}
-.doca-fim .doca-txt em{color:#6ae4ff}
-.seguro-faixa{background:#202a3e!important;border:1px solid #000;border-left:2px solid #6ae4ff;border-radius:15px}
-.seguro-faixa svg{color:#6ae4ff}
-.topo{background:#17202e!important;border-bottom:none}
-.menu a{color:#ffffff}
-.menu a:hover{background:rgba(106,228,255,.08)}
-.atalhos a{color:#cdd0d6}
-.atalhos svg{color:#6ae4ff}
-.menu-btn{background:#202a3e;border:1px solid #000}
-.zap-card{background:#202a3e;color:#ffffff;border:1px solid #000}
-.balao{background:#17202e;color:#ffffff}
-.frota-faixa .foto-card figcaption b{color:#ffffff}
-.foto-card span{color:#cdd0d6}
-.gigante{-webkit-text-stroke:1px rgba(106,228,255,.25);color:transparent}
-.rodape{border-top:1px solid #000}
-.rodape-pe{border-top:1px solid #000;color:#cdd0d6}
-.rodape a{color:#ffffff}
-.rodape a:hover{color:#6ae4ff}
-.rodape h2{color:#6ae4ff}
-.chip,.cidades li,.frota-chips li{border-radius:80px}
-.topo-int .acoes .btn{margin-right:8px}
-/* logo e ícones */
-.marca-txt{color:#cdd0d6}
-/* fundo: o canvas azul-marinho com brilhos azuis vindos de trás (DESIGN.md, "Horizon Glow") */
-body{background:
-  radial-gradient(ellipse 70% 55% at 0% 0%,rgba(8,33,143,.85) 0%,rgba(41,138,203,.28) 45%,rgba(23,32,46,0) 75%),
-  radial-gradient(ellipse 55% 45% at 100% 55%,rgba(41,138,203,.16) 0%,rgba(23,32,46,0) 70%),
-  radial-gradient(ellipse 60% 40% at 20% 100%,rgba(8,33,143,.45) 0%,rgba(23,32,46,0) 70%),
-  #17202e!important;background-attachment:fixed}
-.escuro,.claro,.branco,.sec,.rota,.chamada,.rodape{background:transparent!important}
-/* Horizon Glow (refero / DESIGN.md): o gradiente exato do sistema, aplicado de verdade */
-:root{--gradient-horizon-glow:radial-gradient(circle, rgb(8, 33, 143) 40%, rgb(41, 138, 203) 100%)}
-body{background:
-  radial-gradient(circle at 0% 0%,rgb(8,33,143) 0%,rgb(41,138,203) 90%) fixed no-repeat,
-  #17202e!important}
-.hero{background:radial-gradient(circle at 0% 0%,rgb(8,33,143) 40%,rgb(41,138,203) 100%)!important}
-.hero>img{opacity:.38}
-.hero::after{background:linear-gradient(90deg,rgba(23,32,46,.35) 0%,rgba(23,32,46,.1) 60%,rgba(23,32,46,0) 100%)!important}
-/* ===== Layout centrado no modelo de referência (cartões escuros, pílulas, brilho discreto no topo) ===== */
-body{background:#17202e!important;background-attachment:scroll!important}
-.hero{background:radial-gradient(ellipse 55% 70% at 50% 0%,rgba(8,33,143,.9) 30%,rgba(41,138,203,.28) 100%)!important}
-.hero::after{background:linear-gradient(180deg,rgba(23,32,46,.15) 0%,rgba(23,32,46,.35) 55%,#17202e 100%)!important}
-.hero>img{opacity:.14!important}
-.hero .wrap.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;min-height:0;padding:112px 24px 56px;gap:0}
-.hero-txt{padding:0;max-width:880px}
-.hero-txt .rotulo{justify-content:center}
-.hero h1{font-size:clamp(2.6rem,6.2vw,84px);line-height:1.08;margin:22px 0 20px}
-.hero-txt p{margin:0 auto;max-width:620px}
-.hero-txt .hero-acoes{justify-content:center}
-.hcards{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:940px;width:100%;margin:52px auto 0;padding:0}
-.hcard{background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;text-align:left;display:flex;flex-direction:column;gap:6px}
-.hcard h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.hcard span{color:#cdd0d6;font-size:14px}
-.hcard b{font-size:36px;font-weight:700;letter-spacing:-.03em;margin-top:18px;line-height:1}
-.hcard .chip{align-self:flex-start;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.02em;text-transform:none;background:#17202e;color:#6ae4ff;border:1px solid #000;border-radius:80px;padding:6px 12px}
-.hero .cotar{max-width:760px;width:100%;margin:44px auto 0}
-.hero .garantias{display:none}
-/* seções centralizadas */
-.sec-head{flex-direction:column;align-items:center;text-align:center;gap:14px}
-.sec-head .lead,.sec-head p{margin-left:auto;margin-right:auto}
-.rotulo{justify-content:center}
+body{background:#ffffff!important;color:#1d1d1f;font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:17px;line-height:1.47;letter-spacing:-.374px;-webkit-font-smoothing:antialiased}
+p,li,dd,dt,summary,label,a,span,button,input,select{font-family:"Inter",ui-sans-serif,system-ui,sans-serif}
+h1,h2,h3{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;color:#1d1d1f;margin:0}
+h1{font-weight:600;letter-spacing:-1.2px;line-height:1.05}
+h2{font-weight:600;font-size:clamp(2rem,4vw,40px);line-height:1.1;letter-spacing:0}
+h3{font-weight:600;font-size:21px;line-height:1.2;letter-spacing:.231px}
+p{color:#707070}
+em{font-style:normal;font-weight:600;color:#1d1d1f}
+.escuro em,.claro em,.branco em{color:#1d1d1f}
+a{color:#0066cc;text-decoration:none}
+a:hover{text-decoration:underline}
+/* kicker: rótulo pequeno em 21px/600, sem caixa-alta nem fio */
+.rotulo{font-size:21px;font-weight:600;letter-spacing:.231px;text-transform:none;color:#1d1d1f;justify-content:center}
+.rotulo::before{display:none}
+.escuro .rotulo,.claro .rotulo,.branco .rotulo{color:#1d1d1f}
+.lead{font-size:19px;line-height:1.42;letter-spacing:-.2px;color:#707070}
+/* seções: branco (galeria) e #f5f5f7 (faixas de destaque) */
+.escuro,.branco,.hero{background:#ffffff!important;color:#1d1d1f}
+.claro{background:#f5f5f7!important;color:#1d1d1f}
+.sec{padding:90px 0}
+.sec-head{flex-direction:column;align-items:center;text-align:center;gap:12px;margin-bottom:40px}
+.sec-head .lead{margin:0 auto}
 .sec h2{text-align:center}
-.trajeto-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-.trajeto-head .lead{margin:0 auto}
-/* abas em pílula que filtram os serviços */
-.stab{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:34px}
-.stab button{font:600 15px/1 "Open Sans",sans-serif;color:#cdd0d6;background:transparent;border:0;border-radius:80px;padding:12px 20px;cursor:pointer}
-.stab button[aria-selected=true]{background:#ffffff;color:#000000}
-.stab button:focus-visible{outline:2px solid #6ae4ff;outline-offset:2px}
-.lista-serv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:36px 0 0;border:0;padding:0}
-.lista-serv li{display:flex;flex-direction:column;gap:10px;background:#202a3e;border:1px solid #000;border-radius:15px;padding:24px;grid-template-columns:none;align-items:stretch}
+/* topo: cabeçalho fino e branco, com menu centralizado e uma só ação */
+.topo{background:#ffffff!important;border-bottom:none!important;position:sticky;top:0;z-index:50}
+.topo-linha{height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.marca img{height:24px;width:auto}
+.menu{display:flex;gap:28px;margin:0 auto;padding:0}
+.menu a{color:#1d1d1f;font-size:12px;font-weight:400;letter-spacing:-.12px;padding:0;border:0;background:none;opacity:.8}
+.menu a:hover{opacity:1;text-decoration:underline;background:none}
+.topo .btn-linha{background:#0071e3!important;color:#ffffff!important;border:0!important;min-height:30px;padding:0 16px;font-size:12px;font-weight:400;letter-spacing:-.12px;border-radius:9999px}
+.atalhos{display:none!important}
+.menu-btn{background:transparent;border:0;color:#1d1d1f;width:36px;height:36px}
+@media (max-width:1100px){
+  .menu{display:none;position:absolute;left:12px;right:12px;top:58px;flex-direction:column;background:#ffffff;border-radius:28px;padding:16px;gap:4px;align-items:flex-start}
+  .menu.aberto{display:flex}
+  .menu a{font-size:17px;padding:10px 6px;opacity:1}
+  .topo .btn-linha{display:none}
+}
+/* botões: pílula; principal azul, secundário contorno cinza */
+.btn{border-radius:9999px;font-weight:400;font-size:17px;letter-spacing:-.374px;min-height:44px;padding:11px 22px;line-height:1.18}
+.btn-ouro{background:#0071e3!important;color:#ffffff!important;border:1px solid transparent}
+.btn-ouro:hover{background:#0077ed!important;text-decoration:none}
+.btn-linha{background:transparent;color:#1d1d1f;border:1px solid #86868b;border-radius:9999px}
+.btn-linha:hover{border-color:#1d1d1f}
+.btn-zap{background:#25d366;color:#053d1d;border-radius:9999px}
+/* hero: título 80px/600, cartões de destaque numa faixa cinza */
+.hero{position:relative;display:flex;flex-direction:column}
+.hero>img{position:relative;inset:auto;order:2;width:min(1120px,calc(100% - 48px));aspect-ratio:16/7;object-fit:cover;border-radius:28px;margin:0 auto 90px;opacity:1}
+.hero .wrap.hero-grid{order:1;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:0;padding:72px 24px 48px;gap:0}
+.hero-txt{max-width:900px;padding:0}
+.hero h1{font-size:clamp(2.8rem,7vw,80px);line-height:1.05;letter-spacing:-1.2px;margin:12px 0 18px;color:#1d1d1f}
+.hero h1 em{color:#1d1d1f}
+.hero-txt p{color:#707070;font-size:21px;line-height:1.38;letter-spacing:.231px;max-width:640px;margin:0 auto}
+.hero-txt .hero-acoes{justify-content:center;margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.hcards{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1000px;width:100%;margin:52px auto 0;padding:12px;background:#f5f5f7;border-radius:28px}
+.hcard{background:#ffffff;border:0;border-radius:28px;padding:28px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.hcard h3{font-size:21px}
+.hcard span{color:#707070;font-size:14px;letter-spacing:-.224px}
+.hcard b{font-size:40px;font-weight:600;letter-spacing:0;margin-top:20px;line-height:1.05;color:#1d1d1f}
+.hcard .chip{align-self:flex-start;margin-top:12px;font-size:12px;font-weight:400;letter-spacing:-.12px;background:#f5f5f7;color:#1d1d1f;border:0;border-radius:9999px;padding:6px 12px}
+.hero .cotar{max-width:760px;width:100%;margin:48px auto 0;background:#f5f5f7;border:0;border-radius:28px;padding:12px}
+.hero .garantias{display:none}
+/* abas em pílula */
+.stab{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:32px}
+.stab button{font:400 17px/1.18 "Inter",sans-serif;letter-spacing:-.374px;color:#707070;background:transparent;border:0;border-radius:9999px;padding:10px 18px;cursor:pointer}
+.stab button[aria-selected=true]{background:#1d1d1f;color:#ffffff}
+.stab button:focus-visible{outline:2px solid #0071e3;outline-offset:2px}
+/* cartões: #f5f5f7 sobre branco, brancos sobre a faixa */
+.lista-serv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:36px 0 0;border:0;padding:0}
+.lista-serv li{display:flex;flex-direction:column;gap:10px;background:#f5f5f7;border:0;border-radius:28px;padding:28px;align-items:stretch;grid-template-columns:none}
 .lista-serv li[hidden]{display:none}
-.lista-serv h3{font-size:20px;font-weight:600}
-.lista-serv .tag{text-align:left;margin-top:auto;color:#6ae4ff}
-.serv-rodape{text-align:center}
+.lista-serv h3{font-size:21px}
+.lista-serv h3 a{color:#1d1d1f}
+.lista-serv .tag{text-align:left;margin-top:auto;color:#0066cc;font-size:14px;font-weight:400;letter-spacing:-.224px;text-transform:none}
+.serv-rodape{text-align:center;color:#707070}
+.servico,.selo,.passos li,.docs li,.foto-card,.bloco,.faq,.zap-card{background:#f5f5f7!important;border:0!important;border-radius:28px!important;color:#1d1d1f}
+.claro .servico,.claro .selo,.claro .passos li,.claro .docs li,.claro .lista-serv li{background:#ffffff!important}
+.servico p,.selo p,.passos p,.docs p,.foto-card span,.b-num p{color:#707070}
+.servico .tag,.selo .tag{color:#0066cc;font-size:14px;text-transform:none;letter-spacing:-.224px}
+.servico .ico,.selo svg{color:#0071e3}
+.servico .ico{background:#f5f5f7;border:0;border-radius:9999px}
 /* cobertura: dois cartões de mesma altura */
-.cob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
-.cob-txt,.prazos{background:#202a3e!important;border:1px solid #000!important;border-radius:15px;padding:36px!important}
-.cob-txt h2{font-size:clamp(1.8rem,3vw,40px);text-align:left}
-.cob-txt .rotulo{justify-content:flex-start}
+.cob-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
+.cob-txt,.prazos{background:#ffffff!important;border:0!important;border-radius:28px!important;padding:40px!important;color:#1d1d1f}
+.cob-txt h2{text-align:left;font-size:clamp(1.8rem,3vw,40px)}
+.cob-txt .rotulo{justify-content:flex-start;font-size:17px}
 .cob-txt .lead{text-align:left}
-.cidades{justify-content:flex-start}
-.prazos dl>div{padding:16px 0}
-.prazos h3{text-align:left}
-/* frota centralizada */
+.prazos h3{font-size:17px;font-weight:600;color:#1d1d1f;text-transform:none;letter-spacing:-.374px}
+.prazos dl>div{border-bottom:1px solid #d6d6d6;padding:16px 0}
+.prazos dt{font-weight:400;color:#1d1d1f;font-size:17px}
+.prazos dt small{color:#707070;font-size:14px}
+.prazos dd{font-weight:600;color:#1d1d1f;font-size:21px;letter-spacing:.231px}
+.prazos dd.hoje{background:#0071e3!important;color:#ffffff!important;border:0!important;border-radius:9999px;padding:6px 14px;font-size:17px}
+.cidades li{background:#f5f5f7;border-radius:9999px;color:#1d1d1f;font-size:14px;padding:6px 12px}
+.endereco{background:#f5f5f7;border-radius:28px;color:#1d1d1f}
+.endereco a{color:#0066cc}
+/* frota: texto centralizado, números em 56px/600 */
 .frota-topo{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
 .frota-topo>div:first-child{display:flex;flex-direction:column;align-items:center}
 .composicao{max-width:760px;width:100%;margin:28px auto 0}
-.numeros{max-width:760px;width:100%;margin:40px auto 0}
-.numeros div{text-align:center}
-.numeros div+div{border-left:1px solid #000}
-.video-frota{max-width:340px;width:100%;margin:0 auto}
+.composicao li{color:#707070;border-bottom:1px solid #d6d6d6}
+.composicao b{color:#1d1d1f}
+.numeros{max-width:900px;width:100%;margin:44px auto 0;border-top:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.numeros div{background:#f5f5f7;border-radius:28px;padding:32px 24px;text-align:center}
+.numeros div+div{border-left:0}
+.numeros b{font-size:56px;font-weight:600;letter-spacing:-1.2px;color:#1d1d1f;line-height:1.05}
+.numeros span{color:#707070;font-size:14px}
+.video-frota{max-width:340px;width:100%;margin:0 auto;border-radius:28px;overflow:hidden;background:#f5f5f7}
+.video-frota figcaption{background:#ffffff;color:#1d1d1f;border-radius:9999px;font-size:12px;letter-spacing:-.12px;text-transform:none;font-weight:400}
 .frota-faixa{margin-top:60px}
-/* cartões de segurança e passos */
-.passos,.docs{max-width:1100px;margin-left:auto;margin-right:auto}
-.docs-painel{text-align:center;display:flex;flex-direction:column;gap:28px}
-.docs-painel .docs{text-align:left}
-/* fundo em blocos sem sombra */
-.chamada{text-align:center}
-.chamada .wrap{display:flex;flex-direction:column;align-items:center}
-.chamada p{margin-left:auto;margin-right:auto}
-.chamada h2{margin-left:auto;margin-right:auto}
+.foto-card img{border-radius:28px 28px 0 0}
+.foto-card figcaption{background:#f5f5f7;border-radius:0 0 28px 28px}
+.foto-card b{color:#1d1d1f;font-size:17px}
+/* trajeto: faixa cinza com a estrada escura */
+.trajeto-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.estrada .pista .asfalto{stroke:#1d1d1f}
+.estrada .fio{stroke:#0071e3}
+.estrada .fio-brilho{stroke:#ffffff;filter:none}
+.parada .marco{background:#ffffff;border:1px solid #0071e3;color:#0071e3}
+.parada .anel{border-color:#0071e3}
+.parada h3{color:#1d1d1f}
+.parada p{color:#707070}
+.parada small{color:#0066cc;text-transform:none;letter-spacing:-.224px;font-size:14px;font-weight:400}
+.seguro-faixa{background:#ffffff!important;border:0!important;border-left:0!important;border-radius:28px!important;padding:32px}
+.seguro-faixa h3{font-size:21px}
+.seguro-faixa svg{color:#0071e3}
+/* chamada: foto em tela cheia, texto branco e botão azul */
+.chamada{position:relative;color:#ffffff;background:#1d1d1f!important;border-radius:28px;overflow:hidden;margin:0 auto;max-width:1120px}
+.chamada .rotulo{color:#ffffff}
+.chamada h2,.chamada p{color:#ffffff}
+.chamada::after{background:rgba(0,0,0,.42)!important}
+.chamada>img{border-radius:0}
+.chamada .wrap{padding:96px 40px}
+/* perguntas */
+.faq-grid{display:grid;grid-template-columns:.8fr 2fr;gap:40px;align-items:start}
+.faq{background:#f5f5f7!important;padding:8px 32px}
+.faq details{border-bottom:1px solid #d6d6d6}
+.faq summary{font-size:19px;font-weight:600;letter-spacing:.231px;color:#1d1d1f}
+.faq summary::after{background:#ffffff;border:0;color:#0071e3}
+.faq details p{color:#707070}
+/* rodapé cinza */
+.rodape{background:#f5f5f7!important;color:#707070;border-top:0}
+.rodape a{color:#1d1d1f}
+.rodape a:hover{color:#0066cc}
+.rodape h2{color:#1d1d1f;font-size:12px;font-weight:600;letter-spacing:-.12px;text-transform:none}
+.rodape-pe{border-top:1px solid #d6d6d6;color:#707070;font-size:12px}
+.rodape .slogan{font-family:"Inter",sans-serif;font-style:normal;color:#707070;font-size:17px}
+.gigante{-webkit-text-stroke:0;color:#e6e6e8;font-weight:700}
+/* doca: faixa cinza com porta clara */
+.doca-fim{background:#f5f5f7;border-top:1px solid #d6d6d6}
+.doca-fim .porta{background:repeating-linear-gradient(180deg,#d6d6d6 0 14px,#f5f5f7 14px 17px)}
+.doca-fim .doca-txt{color:#1d1d1f}
+.doca-fim .doca-txt em{color:#0071e3}
+/* caminhão na margem: contorno fino para aparecer sobre o branco */
+.caminhao-janela img{filter:drop-shadow(1px 0 0 #aeb5c0) drop-shadow(-1px 0 0 #aeb5c0) drop-shadow(0 1px 0 #aeb5c0) drop-shadow(0 -1px 0 #aeb5c0)}
+/* botão do WhatsApp: pílula verde sem brilho */
+.zap-btn{background:#25d366;color:#053d1d;box-shadow:none}
+.zap-btn::before{display:none}
+.zap-btn .aviso{background:#0071e3}
+.zap-card{background:#ffffff!important;color:#1d1d1f}
+.balao{background:#f5f5f7;color:#1d1d1f;border-radius:28px}
 @media (max-width:1000px){
-  .hcards,.lista-serv,.cob-grid{grid-template-columns:1fr}
-  .numeros{grid-template-columns:1fr}
+  .hcards,.lista-serv,.cob-grid,.numeros{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .hero>img{aspect-ratio:4/3}
 }
+/* movimento do texto: palavras do título sobem uma a uma (CSS, sem JS) */
+@keyframes palavra{from{opacity:0;transform:translateY(.42em)}to{opacity:1;transform:none}}
+@keyframes subir-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .hero h1 .p{display:inline-block;animation:palavra .9s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i) * .07s + .1s)}
+  .hero .rotulo{animation:subir-fade .7s .05s cubic-bezier(.16,1,.3,1) both}
+  .hero-txt p{animation:subir-fade .8s .45s cubic-bezier(.16,1,.3,1) both}
+  .hero .hero-acoes{animation:subir-fade .8s .6s cubic-bezier(.16,1,.3,1) both}
+  .hcard{animation:subir-fade .8s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.7s + var(--i) * .1s)}
+}
+/* foto do topo sem sobreposição escura: o tema claro não usa véu sobre imagens do topo */
+.hero::after,.hero::before{display:none!important;background:none!important}
+.hero>img{opacity:1!important;filter:none!important}
 </style>
 <style>
 .trilha{font-size:.85rem;color:var(--apagado);margin-bottom:22px}
@@ -636,7 +653,7 @@ body{background:#17202e!important;background-attachment:scroll!important}
 
 <header class="topo">
   <div class="wrap topo-linha">
-    <a class="marca" href="./"><img src="assets/img/zupo-logo.webp" width="484" height="84" alt="ZUPO Transportadora"></a>
+    <a class="marca" href="./"><img src="assets/img/zupo-logo-claro.webp" width="484" height="84" alt="ZUPO Transportadora"></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
@@ -649,16 +666,7 @@ body{background:#17202e!important;background-attachment:scroll!important}
     </nav>
     <a class="btn btn-linha" href="https://wa.me/5511995854072?text=Ol%C3%A1!%20Quero%20uma%20cota%C3%A7%C3%A3o%20de%20frete%20com%20a%20ZUPO." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-zap"/></svg>(11) 99585-4072</a>
   </div>
-  <nav class="atalhos" aria-label="Atalhos">
-    <ul>
-      <li><a href="./#cotar"><svg aria-hidden="true"><use href="#i-caixa"/></svg>Cotar frete</a></li>
-      <li><a href="./#cotar"><svg aria-hidden="true"><use href="#i-busca"/></svg>Rastrear carga</a></li>
-      <li><a href="https://wa.me/5511995854072?text=Ol%C3%A1!%20Quero%20agendar%20uma%20coleta%20com%20a%20ZUPO." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-caminhao"/></svg>Agendar coleta</a></li>
-      <li><a href="./#cobertura"><svg aria-hidden="true"><use href="#i-pino"/></svg>Prazos de entrega</a></li>
-      <li><a href="https://wa.me/5511995854072?text=Ol%C3%A1!%20Sou%20motorista%20e%20quero%20trabalhar%20na%20ZUPO." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-volante"/></svg>Trabalhe conosco</a></li>
-    </ul>
-  </nav>
-</header>
+  </header>
 
 <main id="conteudo">
 <section class="topo-int escuro" aria-labelledby="h1">
@@ -710,7 +718,7 @@ body{background:#17202e!important;background-attachment:scroll!important}
   <div class="wrap">
     <div class="rodape-grid">
       <div>
-        <a href="./" aria-label="ZUPO Transportadora, página inicial"><img class="logo-completo" src="assets/img/zupo-logo-completo.webp" width="520" height="312" loading="lazy" alt=""></a>
+        <a href="./" aria-label="ZUPO Transportadora, página inicial"><img class="logo-completo" src="assets/img/zupo-logo-completo-claro.webp" width="520" height="312" loading="lazy" alt=""></a>
         <p class="slogan">Seu destino, nosso compromisso.</p>
       </div>
       <div>
