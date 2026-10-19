@@ -612,14 +612,22 @@ a:hover{text-decoration:underline}
 .halo-credit:hover .halo-sym{transform:rotate(120deg)}
 .halo-sym{transition:transform .8s cubic-bezier(.16,1,.3,1)}
 .halo-nome{font-size:15px;letter-spacing:-.02em}
-.halo-nome small{font-size:.6em;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#707070}
+.halo-nome small{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#6e6e73}
+/* revisão de design: ação no celular, leitura por leitores de tela, abas só para o rastreio */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.so-celular{display:none}
+@media (max-width:1000px){.so-celular{display:inline-flex;margin:0 auto 28px}}
+.abas{display:none}
+.trocar-aba{margin-top:16px;text-align:center}
+.voltar-cotacao{display:block;margin:0 0 12px}
+.campo input::placeholder{color:#6e6e73}
 .rodape .slogan{font-family:"Inter",sans-serif;font-style:normal;color:#707070;font-size:17px}
 .gigante{-webkit-text-stroke:0;color:#e6e6e8;font-weight:700}
 /* doca: faixa cinza com porta clara */
 .doca-fim{background:#f5f5f7;border-top:1px solid #d6d6d6}
 .doca-fim .porta{background:repeating-linear-gradient(180deg,#d6d6d6 0 14px,#f5f5f7 14px 17px)}
 .doca-fim .doca-txt{color:#1d1d1f}
-.doca-fim .doca-txt em{color:#0071e3}
+.doca-fim .doca-txt em{color:#0066cc}
 /* caminhão na margem: contorno fino para aparecer sobre o branco */
 .caminhao-janela img{filter:drop-shadow(1px 0 0 #aeb5c0) drop-shadow(-1px 0 0 #aeb5c0) drop-shadow(0 1px 0 #aeb5c0) drop-shadow(0 -1px 0 #aeb5c0)}
 /* botão do WhatsApp: pílula verde sem brilho */
@@ -707,6 +715,8 @@ a:hover{text-decoration:underline}
       <p>11 caminhões próprios, seguro até o valor da nota fiscal e rastreio por satélite em todas as viagens. Pedido confirmado até as 11h é entregue no mesmo dia na Grande São Paulo.</p>
     </div>
 
+    <a class="btn btn-ouro so-celular" href="#cotar">Cotar frete</a>
+    <h2 class="sr-only">Destaques da ZUPO</h2>
     <ul class="hcards" aria-label="Destaques da ZUPO">
         <li class="hcard"><h3>Seguro</h3><span>RCTR-C e RC-DC em toda viagem</span><b>Até a NF</b><span class="chip">Valor da nota fiscal</span></li>
         <li class="hcard"><h3>Rastreio</h3><span>Rastreador por satélite</span><b>24 h</b><span class="chip">Bloqueio remoto</span></li>
@@ -728,11 +738,13 @@ a:hover{text-decoration:underline}
             <div class="campo"><label for="f-peso">Peso (kg)</label><input id="f-peso" name="peso" inputmode="numeric" placeholder="800"></div>
             <div class="campo"><label for="f-volumes">Volumes</label><input id="f-volumes" name="volumes" placeholder="4 paletes"></div>
           </div>
+          <div class="campo"><label for="f-valor">Valor da nota fiscal (R$)</label><input id="f-valor" name="valor" inputmode="numeric" placeholder="25.000"></div>
         </div>
         <button class="btn btn-ouro" type="submit"><svg aria-hidden="true"><use href="#i-zap"/></svg>Cotar pelo WhatsApp</button>
         <p class="painel-nota" id="nota-cotar" aria-live="polite">Resposta em até <b>30 minutos</b>, de segunda a sábado.</p>
-      </form></div>
-      <div class="painel" id="p-rastrear" role="tabpanel" aria-labelledby="aba-rastrear" hidden><form id="f-rastrear" novalidate>
+      </form>
+      <p class="trocar-aba"><button type="button" class="link-zap" data-aba="aba-rastrear">Quer rastrear uma carga? Abrir o rastreio</button></p></div>
+      <div class="painel" id="p-rastrear" role="tabpanel" aria-labelledby="aba-rastrear" hidden><button type="button" class="link-zap voltar-cotacao" data-aba="aba-cotar">← Voltar para a cotação</button><form id="f-rastrear" novalidate>
         <h2>A sua carga já saiu?</h2>
         <div class="campos">
           <div class="campo"><svg aria-hidden="true"><use href="#i-caixa"/></svg><label for="f-doc">Consultar</label>
@@ -751,12 +763,6 @@ a:hover{text-decoration:underline}
     </div>
   </div>
   <div class="wrap">
-    <ul class="garantias" aria-label="Garantias em toda viagem">
-      <li><svg aria-hidden="true"><use href="#i-escudo"/></svg>Seguro RCTR-C e RC-DC</li>
-      <li><svg aria-hidden="true"><use href="#i-satelite"/></svg>Rastreio 24 h com bloqueio remoto</li>
-      <li><svg aria-hidden="true"><use href="#i-chave"/></svg>Caminhões e motoristas próprios</li>
-      <li><svg aria-hidden="true"><use href="#i-doc"/></svg>RNTRC ativo na ANTT</li>
-    </ul>
   </div>
 </section>
 
@@ -819,7 +825,7 @@ a:hover{text-decoration:underline}
       <button type="button" role="tab" aria-selected="true" data-filtro="todos">Todos</button>
       <button type="button" role="tab" aria-selected="false" data-filtro="fracionada">Fracionada</button>
       <button type="button" role="tab" aria-selected="false" data-filtro="lotacao">Lotação</button>
-      <button type="button" role="tab" aria-selected="false" data-filtro="vuc">Centro (VUC)</button>
+      <button type="button" role="tab" aria-selected="false" data-filtro="vuc">Centro da cidade</button>
       <button type="button" role="tab" aria-selected="false" data-filtro="contrato">Contrato</button>
     </div>
     <ul class="lista-serv">
@@ -1012,7 +1018,7 @@ a:hover{text-decoration:underline}
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
 
   // abas cotar / rastrear
-  const abas = [...document.querySelectorAll('[role=tab]')];
+  const abas = [...document.querySelectorAll('.abas [role=tab]')];
   const selAba = t => abas.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; document.getElementById(b.getAttribute('aria-controls')).hidden = !on; });
   abas.forEach((t, i) => {
     t.addEventListener('click', () => selAba(t));
@@ -1079,7 +1085,7 @@ a:hover{text-decoration:underline}
     }
     nc.textContent = 'Abrindo o WhatsApp com a mensagem pronta.';
     abrirZap(['Olá! Quero uma cotação de frete.', `Coleta: ${d.origem.trim()}`, `Entrega: ${d.destino.trim()}`, `Serviço: ${d.servico}`,
-      d.peso && `Peso: ${d.peso} kg`, d.volumes && `Volumes: ${d.volumes}`]);
+      d.peso && `Peso: ${d.peso} kg`, d.volumes && `Volumes: ${d.volumes}`, d.valor && `Valor da NF: R$ ${d.valor}`]);
   });
 
   // rastreio: com a chave do CT-e, abre a consulta pública da Sefaz; com a nota fiscal, pergunta no WhatsApp
